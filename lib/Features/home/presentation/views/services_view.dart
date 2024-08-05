@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kafiil_app/Features/home/presentation/views/widgets/popular_products_list_view.dart';
 import 'package:kafiil_app/core/utils/styles_app.dart';
-import 'package:kafiil_app/features/home/presentation/views/widgets/product_list_view.dart';
+import 'package:kafiil_app/features/home/presentation/views/widgets/products_list_view.dart';
 
 class ServicesView extends StatelessWidget{
   const ServicesView({super.key});
@@ -21,7 +22,7 @@ class ServicesView extends StatelessWidget{
             const SizedBox(height: 35),
             Text('Popular Services', style: StylesApp.styleSemiBold18(context)),
             const SizedBox(height: 30),
-            const ProductsListView()
+            const PopularProductsListView()
           ],
         ),
       ),

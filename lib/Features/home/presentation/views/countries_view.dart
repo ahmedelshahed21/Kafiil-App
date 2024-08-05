@@ -269,7 +269,8 @@ class _PaginatedCountriesTableState extends State<PaginatedCountriesTable> {
                       itemTextStyle: StylesApp.styleMedium14(context)
                           .copyWith(color: kGrey800Color),
                       itemBorderColor: kGrey200Color,
-                      itemBorderWidth: 1),
+                      itemBorderWidth: 1.5,
+                  ),
                   child: SfDataPager(
                     delegate: CountryDataSource(_paginatedCountries),
                     pageCount: _totalPages.toDouble(),
