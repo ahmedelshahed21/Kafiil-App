@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/home/data/models/country_model.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/core/utils/styles_app.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:http/http.dart' as http;
 
 class CountriesView extends StatelessWidget {
   const CountriesView({super.key});
@@ -11,7 +13,7 @@ class CountriesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 63,bottom: 20),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 63, bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,10 +33,10 @@ class CountriesView extends StatelessWidget {
 }
 
 class CountryDataSource extends DataGridSource {
-  final List<Country> _countries;
-  final int _rowsPerPage = 8;
+  List<Country> _countries;
+  final int _rowsPerPage;
 
-  CountryDataSource(this._countries) {
+  CountryDataSource(this._countries, this._rowsPerPage) {
     _paginatedCountries = _countries.take(_rowsPerPage).toList(growable: false);
     buildPaginatedDataGridRows();
   }
@@ -108,10 +110,10 @@ class CountryDataSource extends DataGridSource {
   }
 
   void buildPaginatedDataGridRows() {
-    dataGridRows = _paginatedCountries.map<DataGridRow>((countryInfo) {
+    dataGridRows = _paginatedCountries.map<DataGridRow>((country) {
       return DataGridRow(cells: [
-        DataGridCell(columnName: 'country', value: countryInfo.country),
-        DataGridCell(columnName: 'capital', value: countryInfo.capital),
+        DataGridCell(columnName: 'country', value: country.name),
+        DataGridCell(columnName: 'capital', value: country.capital),
       ]);
     }).toList(growable: false);
   }
@@ -121,94 +123,11 @@ class PaginatedCountriesTable extends StatefulWidget {
   const PaginatedCountriesTable({super.key});
 
   @override
-  _PaginatedCountriesTableState createState() =>
-      _PaginatedCountriesTableState();
+  PaginatedCountriesTableState createState() => PaginatedCountriesTableState();
 }
 
-class _PaginatedCountriesTableState extends State<PaginatedCountriesTable> {
-  final List<Country> countries = [
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'Afghanistan', capital: 'Kabul'),
-    Country(country: 'Albania', capital: 'Tirana'),
-    Country(country: 'Algeria', capital: 'Algiers'),
-    Country(country: 'Andorra', capital: 'Andorra la Vella'),
-    Country(country: 'Angola', capital: 'Luanda'),
-    Country(country: 'Antigua and Barbuda', capital: 'Saint John\'s'),
-    Country(country: 'Argentina', capital: 'Buenos Aires'),
-    Country(country: 'Armenia', capital: 'Yerevan'),
-    Country(country: 'Australia', capital: 'Canberra'),
-    Country(country: 'Austria', capital: 'Vienna'),
-    Country(country: 'Azerbaijan', capital: 'Baku'),
-    Country(country: 'Bahamas', capital: 'Nassau'),
-    Country(country: 'Bahrain', capital: 'Manama'),
-    Country(country: 'Bangladesh', capital: 'Dhaka'),
-    Country(country: 'Barbados', capital: 'Bridgetown'),
-    Country(country: 'Belarus', capital: 'Minsk'),
-    Country(country: 'Belgium', capital: 'Brussels'),
-    Country(country: 'Belize', capital: 'Belmopan'),
-    Country(country: 'Benin', capital: 'Porto-Novo'),
-    Country(country: 'Bhutan', capital: 'Thimphu'),
-    Country(country: 'Bolivia', capital: 'Sucre'),
-    Country(country: 'Bosnia and Herzegovina', capital: 'Sarajevo'),
-    Country(country: 'Botswana', capital: 'Gaborone'),
-    Country(country: 'Brazil', capital: 'Brasília'),
-    Country(country: 'Brunei', capital: 'Bandar Seri Begawan'),
-    Country(country: 'Bulgaria', capital: 'Sofia'),
-    Country(country: 'Burkina Faso', capital: 'Ouagadougou'),
-    Country(country: 'Burundi', capital: 'Gitega'),
-    Country(country: 'Cabo Verde', capital: 'Praia'),
-    Country(country: 'Cambodia', capital: 'Phnom Penh'),
-    Country(country: 'Cameroon', capital: 'Yaoundé'),
-    Country(country: 'Canada', capital: 'Ottawa'),
-    Country(country: 'Central African Republic', capital: 'Bangui'),
-    Country(country: 'Chad', capital: 'N\'Djamena'),
-    Country(country: 'Chile', capital: 'Santiago'),
-    Country(country: 'China', capital: 'Beijing'),
-    Country(country: 'Colombia', capital: 'Bogotá'),
-    Country(country: 'Comoros', capital: 'Moroni'),
-    Country(country: 'Congo', capital: 'Brazzaville'),
-    Country(country: 'Costa Rica', capital: 'San José'),
-    Country(country: 'Croatia', capital: 'Zagreb'),
-    Country(country: 'Cuba', capital: 'Havana'),
-    Country(country: 'Cyprus', capital: 'Nicosia'),
-    Country(country: 'Czech Republic', capital: 'Prague'),
-    Country(country: 'Denmark', capital: 'Copenhagen'),
-    Country(country: 'Djibouti', capital: 'Djibouti'),
-    Country(country: 'Dominica', capital: 'Roseau'),
-    Country(country: 'Dominican Republic', capital: 'Santo Domingo'),
-    Country(country: 'Ecuador', capital: 'Quito'),
-    Country(country: 'Egypt', capital: 'Cairo'),
-    Country(country: 'El Salvador', capital: 'San Salvador'),
-    Country(country: 'Equatorial Guinea', capital: 'Malabo'),
-    Country(country: 'Eritrea', capital: 'Asmara'),
-    Country(country: 'Estonia', capital: 'Tallinn'),
-    Country(country: 'Eswatini', capital: 'Mbabane'),
-    Country(country: 'Ethiopia', capital: 'Addis Ababa'),
-    Country(country: 'Fiji', capital: 'Suva'),
-    Country(country: 'Finland', capital: 'Helsinki'),
-    Country(country: 'France', capital: 'Paris'),
-    Country(country: 'Gabon', capital: 'Libreville'),
-    Country(country: 'Gambia', capital: 'Banjul'),
-    Country(country: 'Georgia', capital: 'Tbilisi'),
-    Country(country: 'Germany', capital: 'Berlin'),
-    Country(country: 'Ghana', capital: 'Accra'),
-    Country(country: 'Ghana', capital: 'Accra'),
-    Country(country: 'Greece', capital: 'Athens'),
-    Country(country: 'Grenada', capital: 'St. George\'s'),
-    Country(country: 'Guatemala', capital: 'Guatemala City'),
-    Country(country: 'Guinea', capital: 'Conakry'),
-    Country(country: 'Guinea-Bissau', capital: 'Bissau'),
-    Country(country: 'Guyana', capital: 'Georgetown'),
-    Country(country: 'Haiti', capital: 'Port-au-Prince'),
-  ];
-
+class PaginatedCountriesTableState extends State<PaginatedCountriesTable> {
+  List<Country> _countries = [];
   late int _rowsPerPage;
   late double _dataPagerHeight;
   late List<Country> _paginatedCountries;
@@ -218,23 +137,54 @@ class _PaginatedCountriesTableState extends State<PaginatedCountriesTable> {
   @override
   void initState() {
     super.initState();
-    _rowsPerPage = 8;
+    _rowsPerPage = 10;
     _dataPagerHeight = 60.0;
-    _calculatePages();
-    _currentPageIndex = 1;
-    _paginatedCountries = _getPaginatedData(_currentPageIndex);
+    _currentPageIndex = 0;
+    _fetchCountries();
+  }
+
+  Future<void> _fetchCountries() async {
+    List<Country> allCountries = [];
+    var currentPage = 1;
+    final int totalPages = 25;
+
+    while (currentPage <= totalPages) {
+      final response = await http.get(Uri.parse('https://test.kafiil.com/api/test/country?page=$currentPage'));
+
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body) as Map<String, dynamic>;
+        final List<dynamic> countriesJson = jsonData['data'] as List<dynamic>;
+
+        allCountries.addAll(
+          countriesJson
+              .map((json) => Country.fromJson(json as Map<String, dynamic>))
+              .toList(),
+        );
+
+        currentPage++;
+      } else {
+        // Handle error
+        throw Exception('Failed to load countries');
+      }
+    }
+
+    setState(() {
+      _countries = allCountries;
+      _calculatePages();
+      _paginatedCountries = _getPaginatedData(_currentPageIndex);
+    });
   }
 
   void _calculatePages() {
-    _totalPages = (countries.length / _rowsPerPage).ceil();
+    _totalPages = (_countries.length / _rowsPerPage).ceil();
   }
 
   List<Country> _getPaginatedData(int pageIndex) {
     final startIndex = pageIndex * _rowsPerPage;
     final endIndex = startIndex + _rowsPerPage;
-    if (startIndex < countries.length) {
-      return countries
-          .getRange(startIndex, endIndex.clamp(0, countries.length))
+    if (startIndex < _countries.length) {
+      return _countries
+          .getRange(startIndex, endIndex.clamp(0, _countries.length))
           .toList();
     } else {
       return [];
@@ -260,19 +210,19 @@ class _PaginatedCountriesTableState extends State<PaginatedCountriesTable> {
                 height: _dataPagerHeight,
                 child: SfDataPagerTheme(
                   data: SfDataPagerThemeData(
-                      itemColor: Colors.white,
-                      disabledItemColor: Colors.white,
-                      selectedItemColor: kPrimary900Color,
-                      selectedItemTextStyle: StylesApp.styleMedium14(context)
-                          .copyWith(color: kBackgroundColor),
-                      itemBorderRadius: BorderRadius.circular(7),
-                      itemTextStyle: StylesApp.styleMedium14(context)
-                          .copyWith(color: kGrey800Color),
-                      itemBorderColor: kGrey200Color,
-                      itemBorderWidth: 1.5,
+                    itemColor: Colors.white,
+                    disabledItemColor: Colors.white,
+                    selectedItemColor: kPrimary900Color,
+                    selectedItemTextStyle: StylesApp.styleMedium14(context)
+                        .copyWith(color: kBackgroundColor),
+                    itemBorderRadius: BorderRadius.circular(7),
+                    itemTextStyle: StylesApp.styleMedium14(context)
+                        .copyWith(color: kGrey800Color),
+                    itemBorderColor: kGrey200Color,
+                    itemBorderWidth: 1.5,
                   ),
                   child: SfDataPager(
-                    delegate: CountryDataSource(_paginatedCountries),
+                    delegate: CountryDataSource(_paginatedCountries, _rowsPerPage),
                     pageCount: _totalPages.toDouble(),
                     onPageNavigationStart: (int newPageIndex) {
                       setState(() {
@@ -293,7 +243,7 @@ class _PaginatedCountriesTableState extends State<PaginatedCountriesTable> {
 
   Widget _buildDataTable() {
     return SfDataGrid(
-      source: CountryDataSource(_paginatedCountries),
+      source: CountryDataSource(_paginatedCountries, _rowsPerPage),
       columnWidthMode: ColumnWidthMode.fill,
       columns: <GridColumn>[
         GridColumn(
