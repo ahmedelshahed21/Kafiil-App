@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/home/data/models/product_model.dart';
-import 'package:kafiil_app/Features/home/presentation/views/widgets/product_image.dart';
-import 'package:kafiil_app/Features/home/presentation/views/widgets/title_product_item.dart';
+import 'package:kafiil_app/Features/home/presentation/views/widgets/service_image.dart';
+import 'package:kafiil_app/Features/home/presentation/views/widgets/title_service_item.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/features/home/presentation/views/widgets/rating_section.dart';
 
-class ProductItem extends StatelessWidget {
-  final ProductModel product;
+class ServiceItem extends StatelessWidget {
+  final ProductModel service;
 
-  const ProductItem({super.key, required this.product});
+  const ServiceItem({super.key, required this.service});
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +26,18 @@ class ProductItem extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Expanded(child: ProductImage(image: product.mainImage,price: product.price)),
+              Expanded(child: ServiceImage(image: service.mainImage, price: service.price)),
               Expanded(
-                  child: Column(
+                child: Column(
                 children: [
-                  TitleProductItem(title: product.title),
-                  const Expanded(child: SizedBox(height: 10)),
-                  RatingSection(rating:product.averageRating,salesCount:product.completedSalesCount),
-                  const Expanded(child: SizedBox(height: 10)),
+                  TitleServiceItem(title: service.title),
+                  const Spacer(),
+                  RatingSection(
+                      rating: service.averageRating,
+                      salesCount: service.completedSalesCount),
+                  const Spacer(),
                 ],
               ))
-
             ],
           ),
         ),

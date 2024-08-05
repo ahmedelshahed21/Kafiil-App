@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/core/utils/styles_app.dart';
 
-class TitleProductItem extends StatelessWidget {
-  const TitleProductItem({
+class TitleServiceItem extends StatelessWidget {
+  const TitleServiceItem({
     super.key,
     required this.title
   });

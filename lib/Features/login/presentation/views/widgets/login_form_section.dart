@@ -25,6 +25,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
         children: [
           CustomTextFormField(
             fieldName: 'Email Address',
+            maxLength: 64,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Email Address is required';
@@ -40,6 +41,15 @@ class _LoginFormSectionState extends State<LoginFormSection> {
           const SizedBox(height: 12),
           CustomTextFormField(
             obscureText: isSecure,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Password is required';
+              }
+              else if(value.length<8) {
+                return 'Password must be at least 8 characters long';
+              }
+              return null;
+            },
             suffixIcon: IconButton(
               icon: isSecure
                   ? const Icon(Icons.visibility_off_outlined)
@@ -51,6 +61,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               },
             ),
             fieldName: 'Password',
+
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
