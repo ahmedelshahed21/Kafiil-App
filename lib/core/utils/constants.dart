@@ -15,3 +15,4 @@ const kWarning300Color=Color(0xffFFCB31);
 const kGrey400Color=Color(0xff8692A6);
 const kGrey600Color=Color(0xff828282);
 const kGrey200Color=Color(0xffE6EAEF);
+const baseUrl='https://test.kafiil.com';
