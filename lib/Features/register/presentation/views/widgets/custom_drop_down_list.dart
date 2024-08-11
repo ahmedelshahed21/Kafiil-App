@@ -11,8 +11,9 @@ class CustomDropDownList extends StatefulWidget {
 }
 
 class _CustomDropDownListState extends State<CustomDropDownList> {
-  final List<String> _userTypes = ['Seller', 'Buyer', 'Both'];
-  String? _userType;
+  final List<String> userTypes = ['Buyer', 'Seller', 'Both'];
+  String? userType;
+  int? userTypeValue=1;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
               child: const Icon(Icons.arrow_back_ios_new,
                 color: kGrey300Color,
               )), // Change the icon and color here
-          items: _userTypes.map((String type) {
+          items: userTypes.map((String type) {
             return DropdownMenuItem<String>(
               value: type,
               child: Text(type,
@@ -52,7 +53,15 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
           }).toList(),
           onChanged: (newValue) {
             setState(() {
-              _userType = newValue;
+              userType = newValue;
+              // Map the selected value to the corresponding integer
+              if (userType == 'Buyer') {
+                userTypeValue = 1;
+              } else if (userType == 'Seller') {
+                userTypeValue = 2;
+              } else if (userType == 'Both') {
+                userTypeValue = 3;
+              }
             });
           },
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -63,7 +72,15 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
             return null;
           },
           onSaved: (value) {
-            _userType = value;
+            userType = value;
+            // Map the saved value to the corresponding integer
+            if (userType == 'Buyer') {
+              userTypeValue = 1;
+            } else if (userType == 'Seller') {
+              userTypeValue = 2;
+            } else if (userType == 'Both') {
+              userTypeValue = 3;
+            }
           },
         ),
       ],

@@ -12,10 +12,8 @@ class ProductsRepoImpl extends ProductsRepo {
   @override
   Future<Either<Failure, List<ProductModel>>> fetchProducts() async {
     try {
-      var response = await apiService.get(endPoint:'service'); // Ensure this is the correct endpoint
-      print('API Response: $response'); // Log the API response
-
-      // Check if response contains 'data' key
+      var response = await apiService.get(endPoint:'service');
+      print('API Response: $response');
       if (response['data'] != null) {
         List<ProductModel> products = [];
         for (var item in response['data']) {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kafiil_app/Features/login/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:kafiil_app/core/functions/custom_snack_bar.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_button.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
-import 'package:kafiil_app/core/utils/app_router.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/core/utils/styles_app.dart';
 
@@ -16,6 +17,8 @@ class LoginFormSection extends StatefulWidget {
 class _LoginFormSectionState extends State<LoginFormSection> {
   bool isSecure=true;
   bool isSelected=true;
+  TextEditingController emailController=TextEditingController();
+  TextEditingController passwordController=TextEditingController();
   static final GlobalKey<FormState> formKey=GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
         children: [
           CustomTextFormField(
             fieldName: 'Email Address',
+            controller: emailController,
             maxLength: 64,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -41,6 +45,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
           const SizedBox(height: 12),
           CustomTextFormField(
             obscureText: isSecure,
+            controller: passwordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Password is required';
@@ -104,7 +109,10 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               text: 'Login',
               onPressed: () {
                 if(formKey.currentState!.validate()){
-                  GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+                  BlocProvider.of<LoginCubit>(context).loginUser(emailController.text, passwordController.text);
+                }
+                else{
+                  customSnackBar(context, 'Invalid Values');
                 }
               },
             ),

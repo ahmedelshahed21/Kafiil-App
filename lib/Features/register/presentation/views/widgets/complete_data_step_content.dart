@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:kafiil_app/core/utils/assets_app.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
@@ -19,15 +20,10 @@ class CompleteDataStepContent extends StatefulWidget {
       _CompleteDataStepContentState();
 }
 
-int counter = 1000;
+int counter = 100;
 
 class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
-  final TextEditingController _birthdateController = TextEditingController();
-  String gender = 'Male';
-  bool isFacebookSelected = true;
-  bool isTwitterSelected = true;
-  bool isLinkedInSelected = false;
-  List<String> selectedSkills = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +34,14 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
         CustomTextFormField(
           fieldName: 'About',
           minLines: 4,
-          maxLength: 1200,
-          validator: (v) {
+          maxLength: 1000,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Password is required';
+            }
+            else if(value.length<10) {
+              return 'Password must be at least 8 characters long';
+            }
             return null;
           },
           maxLines: 4,
@@ -60,7 +62,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   CustomFloatingActionButton(
                       onPressed: () {
                         setState(() {
-                          if (counter > 1000) {
+                          if (counter > 100) {
                             counter -= 100;
                           }
                         });
@@ -79,7 +81,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   CustomFloatingActionButton(
                       onPressed: () {
                         setState(() {
-                          counter += 100;
+                          if(counter<1000){
+                            counter += 100;
+                          }
                         });
                       },
                       child: const Icon(
@@ -95,7 +99,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
         const SizedBox(height: 12),
         CustomTextFormField(
           fieldName: 'Birth Date',
-          controller: _birthdateController,
+          controller: birthdateController,
           onTap: () async {
             DateTime? pickedDate = await showDatePicker(
               context: context,
@@ -105,7 +109,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             );
             if (pickedDate != null) {
               setState(() {
-                _birthdateController.text =
+                birthdateController.text =
                     DateFormat('yyyy-MM-dd').format(pickedDate);
               });
             }

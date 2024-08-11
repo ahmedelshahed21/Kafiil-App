@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/custom_drop_down_list.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
@@ -13,17 +14,7 @@ class RegisterStepContent extends StatefulWidget{
 }
 
 class _RegisterStepContentState extends State<RegisterStepContent> {
-  TextEditingController firstNameController=TextEditingController();
 
-  TextEditingController lastNameController=TextEditingController();
-
-  TextEditingController emailAddressController=TextEditingController();
-
-  TextEditingController passwordController=TextEditingController();
-
-  TextEditingController confirmationPasswordController=TextEditingController();
-
-  bool isSecure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +42,7 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
           ),
           CustomTextFormField(
             fieldName: 'Email Address',
+            maxLength: 64,
             controller: emailAddressController,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -71,8 +63,17 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
           CustomTextFormField(
             fieldName: 'Password',
             controller: passwordController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Password is required';
+              }
+              else if(value.length<8) {
+                return 'Password must be at least 8 characters long';
+              }
+              return null;
+            },
             suffixIcon: IconButton(
-              icon: isSecure
+              icon: isPasswordSecure
                   ? const Icon(Icons.visibility_off_outlined,
                 color: kGrey400Color,
               )
@@ -81,11 +82,11 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
               ),
               onPressed: () {
                 setState(() {
-                  isSecure = !isSecure;
+                  isPasswordSecure = !isPasswordSecure;
                 });
               },
             ),
-            obscureText: isSecure,
+            obscureText: isPasswordSecure,
           ),
           const SizedBox(
             height: 12,
@@ -103,7 +104,7 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
               return null;
             },
             suffixIcon: IconButton(
-              icon: isSecure
+              icon: isConfirmationPasswordSecure
                   ? const Icon(Icons.visibility_off_outlined,
                 color: kGrey400Color,
               )
@@ -112,11 +113,11 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
               ),
               onPressed: () {
                 setState(() {
-                  isSecure = !isSecure;
+                  isConfirmationPasswordSecure = !isConfirmationPasswordSecure;
                 });
               },
             ),
-            obscureText: isSecure,
+            obscureText: isConfirmationPasswordSecure,
           ),
           const SizedBox(
             height: 12,

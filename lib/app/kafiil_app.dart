@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafiil_app/Features/home/data/repos/countries_repo/countries_repo_impl.dart';
 import 'package:kafiil_app/Features/home/data/repos/popular_products_repo/popular_products_repo_impl.dart';
 import 'package:kafiil_app/Features/home/data/repos/products_repo/products_repo_impl.dart';
+import 'package:kafiil_app/Features/home/data/repos/who_am_i_repo/who_am_i_repo_impl.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/countries_cubit/countries_cubit.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/products_cubit/products_cubit.dart';
+import 'package:kafiil_app/Features/home/presentation/manager/who_am_i_cubit/who_am_i_cubit.dart';
 import 'package:kafiil_app/core/utils/app_router.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/core/utils/service_locator.dart';
@@ -19,7 +21,8 @@ class KafiilApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => ProductsCubit(getIt.get<ProductsRepoImpl>())..fetchProducts()),
         BlocProvider(create: (context) => PopularProductsCubit(getIt.get<PopularProductsRepoImpl>())..fetchPopularProducts()),
-        BlocProvider(create: (context)=>CountriesCubit(getIt.get<CountriesRepoImpl>())..fetchAllCountries())
+        BlocProvider(create: (context)=>CountriesCubit(getIt.get<CountriesRepoImpl>())..fetchAllCountries()),
+        BlocProvider(create: (context)=>WhoAmICubit(getIt.get<WhoAmIRepoImpl>())..fetchPersonalData()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

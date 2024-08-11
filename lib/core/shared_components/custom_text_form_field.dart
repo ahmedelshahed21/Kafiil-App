@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? minLines;
   final TextInputType? textInputType;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
   final Widget? prefix;
   final Widget? prefixIcon;
   final Widget? suffix;
@@ -29,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.textInputType,
     this.validator,
+    this.onChanged,
     this.suffixIcon,
     this.suffixOnPressed,
     this.obscureText,
@@ -65,6 +67,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         const SizedBox(height: 5.0),
         TextFormField(
+          onChanged: onChanged,
           onTap: onTap,
           readOnly: readOnly ?? false,
           style: StylesApp.styleMedium16(context).copyWith(

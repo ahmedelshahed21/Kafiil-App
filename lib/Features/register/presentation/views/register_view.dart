@@ -8,14 +8,29 @@ import 'package:kafiil_app/features/register/presentation/views/widgets/register
 import 'package:kafiil_app/core/utils/styles_app.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/error_container.dart';
 
+TextEditingController firstNameController=TextEditingController();
+TextEditingController lastNameController=TextEditingController();
+TextEditingController emailAddressController=TextEditingController();
+TextEditingController passwordController=TextEditingController();
+TextEditingController confirmationPasswordController=TextEditingController();
+bool isPasswordSecure = true;
+bool isConfirmationPasswordSecure = true;
+final TextEditingController birthdateController = TextEditingController();
+String gender = 'Male';
+bool isFacebookSelected = true;
+bool isTwitterSelected = true;
+bool isLinkedInSelected = false;
+List<String> selectedSkills = [];
+
+
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
   @override
-  _RegisterViewState createState() => _RegisterViewState();
+  RegisterViewState createState() => RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class RegisterViewState extends State<RegisterView> {
 
   int _currentStep = 0;
   final _formKey = GlobalKey<FormState>();
@@ -111,7 +126,7 @@ class _RegisterViewState extends State<RegisterView> {
     return Step(
 
       title: Text('Complete Data',
-          style: StylesApp.styleSemiBold12(context),
+        style: StylesApp.styleSemiBold12(context),
       ),
       content: const CompleteDataStepContent(),
       isActive: _currentStep >= 1,
@@ -125,7 +140,7 @@ class _RegisterViewState extends State<RegisterView> {
         style: StylesApp.styleSemiBold12(context),
       ),
       content: RegisterStepContent(
-        formKey: _formKey
+          formKey: _formKey
       ),
       isActive: _currentStep >= 0,
       state: _currentStep > 0 ? StepState.complete : StepState.indexed,
@@ -156,16 +171,16 @@ class _RegisterViewState extends State<RegisterView> {
         else
           Expanded(
               child: Padding(
-            padding:
+                padding:
                 EdgeInsets.only(left: MediaQuery.sizeOf(context).width * 0.4),
-            child: SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.09,
-              child: CustomTextButton(
-                text: 'Next',
-                onPressed: details.onStepContinue,
-              ),
-            ),
-          )),
+                child: SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 0.09,
+                  child: CustomTextButton(
+                    text: 'Next',
+                    onPressed: details.onStepContinue,
+                  ),
+                ),
+              )),
       ],
     );
   }
