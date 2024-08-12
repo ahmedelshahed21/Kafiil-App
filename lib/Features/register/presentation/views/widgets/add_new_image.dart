@@ -10,7 +10,7 @@ class AddNewImage extends StatelessWidget{
     return Stack(
       children: [
         CircleAvatar(
-          backgroundColor: kPrimary100Color,
+          backgroundColor: kGrey50Color,
           backgroundImage: NetworkImage(image??''),
           radius: 41.5,
         ),

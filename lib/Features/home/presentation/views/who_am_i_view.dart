@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/who_am_i_cubit/who_am_i_cubit.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/who_am_i_cubit/who_am_i_state.dart';
+import 'package:kafiil_app/Features/home/presentation/views/widgets/who_am_i_loading_effect.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
 import 'package:kafiil_app/core/utils/assets_app.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
@@ -45,11 +46,7 @@ class _WhoAmIViewState extends State<WhoAmIView> {
                 BlocBuilder<WhoAmICubit, WhoAmIState>(
                   builder: (context, state) {
                     if (state is WhoAmILoading) {
-                      return const Column(
-                        children: [
-                          Center(child: CircularProgressIndicator()),
-                        ],
-                      );
+                      return const WhoAmILoadingEffect();
                     } else if (state is WhoAmISuccess) {
                       var whoAmI = state.whoAmI;
                       int gender = whoAmI.gender;
@@ -440,3 +437,5 @@ class _WhoAmIViewState extends State<WhoAmIView> {
     );
   }
 }
+
+

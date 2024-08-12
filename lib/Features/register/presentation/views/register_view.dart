@@ -17,9 +17,6 @@ bool isPasswordSecure = true;
 bool isConfirmationPasswordSecure = true;
 final TextEditingController birthdateController = TextEditingController();
 String gender = 'Male';
-bool isFacebookSelected = true;
-bool isTwitterSelected = true;
-bool isLinkedInSelected = false;
 List<String> selectedSkills = [];
 
 

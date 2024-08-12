@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:kafiil_app/Features/home/presentation/views/widgets/add_image_loading_effect.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
+import 'package:kafiil_app/core/models/dependencies_model.dart';
+import 'package:kafiil_app/core/repos/dependencies_repo.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:kafiil_app/core/utils/assets_app.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/core/utils/styles_app.dart';
-import 'package:kafiil_app/features/register/presentation/views/widgets/add_new_image.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/clickable_container.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/custom_floating_action_button.dart';
+import 'package:http/http.dart' as http;
 
 class CompleteDataStepContent extends StatefulWidget {
   const CompleteDataStepContent({super.key});
@@ -21,15 +24,52 @@ class CompleteDataStepContent extends StatefulWidget {
 }
 
 int counter = 100;
+bool isFacebookSelected = true;
+bool isTwitterSelected = true;
+bool isLinkedInSelected = false;
 
 class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
 
+  late DependenciesRepoImpl dependenciesRepo;
+  DependenciesModel? dependencies;
+  bool isLoading = true;
+  String? errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    dependenciesRepo = DependenciesRepoImpl(
+      apiUrl: 'https://test.kafiil.com/api/test/dependencies',
+      httpClient: http.Client(),
+    );
+    _fetchDependencies();
+  }
+
+  Future<void> _fetchDependencies() async {
+    try {
+      final result = await dependenciesRepo.fetchDependencies();
+      setState(() {
+        dependencies = result;
+        isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        errorMessage = error.toString();
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<MultiSelectItem<String>> skillItems = dependencies!.tags
+        .map((tag) => MultiSelectItem<String>(tag.label, tag.label))
+        .toList();
+
+
     return Column(
       children: [
-        const AddNewImage(),
+        const AddNewImageLoadingEffect(),
         const SizedBox(height: 12),
         CustomTextFormField(
           fieldName: 'About',
@@ -286,7 +326,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      'LinkedIn',
+                      'socialMediaItems.',
                       style: StylesApp.styleMedium14(context),
                     ),
                   ],
@@ -295,7 +335,6 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             ),
           ],
         ),
-        const SizedBox(height: 12.0),
         Column(
           children: [
             Align(
@@ -325,26 +364,13 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         color: kGrey50Color,
                       ),
                     ),
-                    items: [
-                      MultiSelectItem("Flutter", "Flutter"),
-                      MultiSelectItem("Dart", "Dart"),
-                      MultiSelectItem("Python", "Python"),
-                      MultiSelectItem("Java", "Java"),
-                      MultiSelectItem("Video Production", "Video Production"),
-                    ],
+                    items: skillItems,
                     onConfirm: (values) {
                       setState(() {
                         selectedSkills = values.cast<String>();
                       });
                     },
                     chipDisplay: MultiSelectChipDisplay(
-                      items: [
-                        MultiSelectItem("Flutter", "Flutter"),
-                        MultiSelectItem("Dart", "Dart"),
-                        MultiSelectItem("Python", "Python"),
-                        MultiSelectItem("Java", "Java"),
-                        MultiSelectItem("Video Production", "Video Production"),
-                      ],
                       chipColor: kPrimary100Color,
                       textStyle: StylesApp.styleMedium12(context)
                           .copyWith(color: kPrimary900Color),
@@ -355,7 +381,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         });
                       },
                     ),
-                    initialValue: const ["Flutter", "Dart"],
+
                     itemsTextStyle: StylesApp.styleMedium12(context)
                         .copyWith(color: kPrimary900Color),
                     selectedItemsTextStyle: StylesApp.styleMedium12(context)
@@ -369,6 +395,8 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             ),
           ],
         ),
+        const SizedBox(height: 12.0),
+
         const SizedBox(height: 30),
       ],
     );

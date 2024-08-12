@@ -87,3 +87,5 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
     );
   }
 }
+
+//{{baseUrl}}/api/test/user/register?first_name=ahmed&last_name=elshahed&about=searching for experts&tags[0]=5&favorite_social_media[0]=instagram&salary=100&birth_date=1970-01-25&type=1&email=samer@gmail.com&password=123123123&password_confirmation=123123123&avatar=https://kafiil.s3.eu-central-1.amazonaws.com/media/avatar/b518d74abedbc2c85e57a31ae1d7b92d/DkDzD7oaOrVbfx1rSyHY5Xdts5Y42sO3.png
