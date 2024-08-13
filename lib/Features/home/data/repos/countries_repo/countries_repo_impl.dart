@@ -4,19 +4,20 @@ import 'package:http/http.dart' as http;
 import 'package:kafiil_app/Features/home/data/models/country_model.dart';
 import 'package:kafiil_app/Features/home/data/repos/countries_repo/countries_repo.dart';
 import 'package:kafiil_app/core/errors/failure.dart';
+import 'package:kafiil_app/core/utils/constants.dart';
 
 class CountriesRepoImpl implements CountriesRepo {
-  final String apiUrl = 'https://test.kafiil.com/api/test/country';
+
 
   @override
   Future<Either<Failure, List<CountryModel>>> fetchCountries(int page) async {
     try {
-      final response = await http.get(Uri.parse('$apiUrl?page=$page'));
-
+      final response = await http.get(Uri.parse('$baseUrl/api/test/country?page=$page'));
+      // print({response.body});
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body) as Map<String, dynamic>;
         final List<dynamic> countriesJson = jsonData['data'] as List<dynamic>;
-
+        // print({response.body});
         final countries = countriesJson
             .map((json) => CountryModel.fromJson(json as Map<String, dynamic>))
             .toList();

@@ -61,7 +61,7 @@ abstract class StylesApp {
       fontSize: getResponsiveFontSize(context, fontSize: 12),
       fontWeight: FontWeight.w500,
       fontFamily: 'Montserrat',
-      color: kLabelTextField,
+      color: kGrey500Color,
     );
   }
 

@@ -11,9 +11,9 @@ class CustomDropDownList extends StatefulWidget {
 }
 
 class _CustomDropDownListState extends State<CustomDropDownList> {
-  final List<String> userTypes = ['Buyer', 'Seller', 'Both'];
+  final List<String> userTypes = ['buyer', 'seller', 'both'];
   String? userType;
-  int? userTypeValue=1;
+  int userTypeValue=1;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +55,11 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
             setState(() {
               userType = newValue;
               // Map the selected value to the corresponding integer
-              if (userType == 'Buyer') {
+              if (userType == 'buyer') {
                 userTypeValue = 1;
-              } else if (userType == 'Seller') {
+              } else if (userType == 'seller') {
                 userTypeValue = 2;
-              } else if (userType == 'Both') {
+              } else if (userType == 'both') {
                 userTypeValue = 3;
               }
             });

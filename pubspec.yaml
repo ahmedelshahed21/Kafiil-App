@@ -49,10 +49,7 @@ dependencies:
   shimmer: ^3.0.0
   modal_progress_hud_nsn: ^0.5.1
   flutter_secure_storage: ^9.2.2
-  textfield_tags: ^3.0.1
-
-
-
+  loading_animation_widget: ^1.2.1
 
 
 dev_dependencies:

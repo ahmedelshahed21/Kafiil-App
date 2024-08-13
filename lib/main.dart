@@ -10,9 +10,3 @@ void main() {
   runApp(const KafiilApp());
 }
 
-
-
-
-
-
-

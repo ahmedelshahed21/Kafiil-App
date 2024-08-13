@@ -23,6 +23,7 @@ class KafiilApp extends StatelessWidget {
         BlocProvider(create: (context) => PopularProductsCubit(getIt.get<PopularProductsRepoImpl>())..fetchPopularProducts()),
         BlocProvider(create: (context)=>CountriesCubit(getIt.get<CountriesRepoImpl>())..fetchAllCountries()),
         BlocProvider(create: (context)=>WhoAmICubit(getIt.get<WhoAmIRepoImpl>())..fetchPersonalData()),
+
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

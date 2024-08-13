@@ -4,9 +4,11 @@ import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/custom_drop_down_list.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
 
-class RegisterStepContent extends StatefulWidget{
-  final Key formKey;
+class RegisterStepContent extends StatefulWidget {
 
+
+
+  final GlobalKey<FormState> formKey;
   const RegisterStepContent({super.key, required this.formKey});
 
   @override
@@ -14,10 +16,14 @@ class RegisterStepContent extends StatefulWidget{
 }
 
 class _RegisterStepContentState extends State<RegisterStepContent> {
+  bool isPasswordSecure = true;
+  bool isConfirmationPasswordSecure = true;
+
 
 
   @override
   Widget build(BuildContext context) {
+
     return Form(
       key: widget.formKey,
       child: Column(
@@ -25,21 +31,21 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
           Row(
             children: [
               Expanded(
-                  child: CustomTextFormField(
-                    fieldName: 'First Name',
-                    controller: firstNameController,
-                  )),
+                child: CustomTextFormField(
+                  fieldName: 'First Name',
+                  controller: firstNameController,
+                ),
+              ),
               const SizedBox(width: 16),
               Expanded(
-                  child: CustomTextFormField(
-                    fieldName: 'Last Name',
-                    controller: lastNameController,
-                  )),
+                child: CustomTextFormField(
+                  fieldName: 'Last Name',
+                  controller: lastNameController,
+                ),
+              ),
             ],
           ),
-          const SizedBox(
-            height: 12,
-          ),
+          const SizedBox(height: 12),
           CustomTextFormField(
             fieldName: 'Email Address',
             maxLength: 64,
@@ -55,29 +61,27 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
               }
               return null;
             },
-
           ),
-          const SizedBox(
-            height: 12,
-          ),
+          const SizedBox(height: 12),
           CustomTextFormField(
             fieldName: 'Password',
             controller: passwordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Password is required';
-              }
-              else if(value.length<8) {
+              } else if (value.length < 8) {
                 return 'Password must be at least 8 characters long';
               }
               return null;
             },
             suffixIcon: IconButton(
               icon: isPasswordSecure
-                  ? const Icon(Icons.visibility_off_outlined,
+                  ? const Icon(
+                Icons.visibility_off_outlined,
                 color: kGrey400Color,
               )
-                  : const Icon(Icons.remove_red_eye_outlined,
+                  : const Icon(
+                Icons.remove_red_eye_outlined,
                 color: kGrey400Color,
               ),
               onPressed: () {
@@ -88,27 +92,27 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
             ),
             obscureText: isPasswordSecure,
           ),
-          const SizedBox(
-            height: 12,
-          ),
+          const SizedBox(height: 12),
           CustomTextFormField(
-            controller: confirmationPasswordController,
             fieldName: 'Confirm Password',
+            controller: passwordConfirmationController,
             validator: (value) {
-              if (value!.isEmpty) {
+              if (value == null || value.isEmpty) {
                 return 'Confirm Password is required';
               }
-              if(value!=passwordController.text){
+              if (value != passwordController.text) {
                 return 'Password and Confirm Password do not match';
               }
               return null;
             },
             suffixIcon: IconButton(
               icon: isConfirmationPasswordSecure
-                  ? const Icon(Icons.visibility_off_outlined,
+                  ? const Icon(
+                Icons.visibility_off_outlined,
                 color: kGrey400Color,
               )
-                  : const Icon(Icons.remove_red_eye_outlined,
+                  : const Icon(
+                Icons.remove_red_eye_outlined,
                 color: kGrey400Color,
               ),
               onPressed: () {
@@ -119,9 +123,7 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
             ),
             obscureText: isConfirmationPasswordSecure,
           ),
-          const SizedBox(
-            height: 12,
-          ),
+          const SizedBox(height: 12),
           const CustomDropDownList(),
           const SizedBox(height: 30),
         ],

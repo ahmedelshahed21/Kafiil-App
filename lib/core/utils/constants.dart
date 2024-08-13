@@ -6,7 +6,6 @@ const kPrimary100Color=Color(0xffE9F9F1);
 const kError50Color=Color(0xffFFF0ED);
 const kError300Color=Color(0xffF56342);
 const kGrey50Color=Color(0xffF9F9F9);
-const kLabelTextField=Color(0xff696F79);
 const kGrey800Color=Color(0xff333333);
 const kGrey500Color=Color(0xff696F79);
 const kGrey300Color=Color(0xffC3C5C8);

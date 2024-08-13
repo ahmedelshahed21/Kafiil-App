@@ -25,7 +25,7 @@ class CountriesTableState extends State<CountriesTable> {
     super.initState();
     _rowsPerPage = 10;
     _dataPagerHeight = 60.0;
-    _currentPageIndex = 0;
+    _currentPageIndex = 1;
     _calculatePages();
   }
 

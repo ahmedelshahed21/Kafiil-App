@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:kafiil_app/Features/login/data/models/login_model.dart';
 import 'package:kafiil_app/Features/login/presentation/manager/login_cubit/login_state.dart';
+import 'package:kafiil_app/core/utils/constants.dart';
 
 
 class LoginCubit extends Cubit<LoginState> {
@@ -16,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     final Map<String, dynamic> data = LoginModel(email: email, password: password).toJson();
     final response = await http.post(
-      Uri.parse('https://test.kafiil.com/api/test/user/login'),
+      Uri.parse('$baseUrl/api/test/user/login'),
       headers: {
         'Accept': 'application/json',
         'Accept-Language': 'ar',

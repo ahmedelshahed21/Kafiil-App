@@ -75,7 +75,6 @@ class CustomTextFormField extends StatelessWidget {
           ),
           keyboardType: textInputType,
           obscureText: obscureText ?? false,
-
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator ??
                   (data) {
@@ -101,7 +100,7 @@ class CustomTextFormField extends StatelessWidget {
             suffix: suffix,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            suffixIconColor: kLabelTextField,
+            suffixIconColor: kGrey500Color,
             hintText: hintText,
             hintStyle: StylesApp.styleMedium16(context).copyWith(color: kGrey800Color),
             enabledBorder: buildOutlineInputBorder(),
