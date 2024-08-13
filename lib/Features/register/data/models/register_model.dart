@@ -1,20 +1,19 @@
 import 'package:dio/dio.dart';
 
 class RegisterModel {
-  final String firstName;
-  final String lastName;
-  final String about;
-  final List<int> tags;
-  final List<String> favoriteSocialMedia;
-  final int salary;
-  final String password;
-  final String email;
-  final String birthDate;
-  final bool? gender;
-  final int type;
-  final String? avatar;  // This will be handled separately for file uploads
-  final String passwordConfirmation;
-
+  String firstName;
+  String lastName;
+  String about;
+  List<int> tags;
+  List<String> favoriteSocialMedia;
+  int salary;
+  String password;
+  String email;
+  String birthDate;
+  bool? gender;
+  int type;
+  String? avatar;
+  String passwordConfirmation;
   RegisterModel({
     required this.firstName,
     required this.lastName,

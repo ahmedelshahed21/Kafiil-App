@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:kafiil_app/Features/register/data/models/register_model.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/Features/register/presentation/views/widgets/add_avatar.dart';
 import 'package:kafiil_app/core/models/dependencies_model.dart';
@@ -68,7 +69,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
       selectedSocialMedia.add('x');
     }
     if(isInstagramSelected==true){
-     selectedSocialMedia.add('instagram');
+      selectedSocialMedia.add('instagram');
     }
 
 
@@ -363,7 +364,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       const Icon(FontAwesomeIcons.x),
                       const SizedBox(width: 5),
                       Text(
-                        'Twitter',
+                        'X',
                         style: StylesApp.styleMedium14(context),
                       ),
                     ],
@@ -396,7 +397,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        'socialMediaItems.',
+                        'Instagram',
                         style: StylesApp.styleMedium14(context),
                       ),
                     ],
@@ -406,6 +407,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             ],
           ),
           const SizedBox(height: 30),
+
+
+
         ],
       ),
     );

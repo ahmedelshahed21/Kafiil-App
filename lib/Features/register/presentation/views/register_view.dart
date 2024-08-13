@@ -23,8 +23,8 @@ TextEditingController aboutController=TextEditingController();
 TextEditingController birthdateController = TextEditingController();
 bool gender = false;
 int counter = 100;
-List<String> selectedSocialMedia = ['facebook'];
-List<int> selectedSkills = [1];
+List<String> selectedSocialMedia = [];
+List<int> selectedSkills = [];
 bool isFacebookSelected = false;
 bool isXSelected = false;
 bool isInstagramSelected = false;
@@ -102,24 +102,6 @@ class RegisterViewState extends State<RegisterView> {
                   } else {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      _errorMessage = '';
-                    } else {
-                      setState(() {
-                        _errorMessage = 'Fill the required fields';
-                      });
-                    }
-                  }
-
-                  if (_currentStep <= 1) {
-                    if (_formKey2.currentState!.validate()) {
-                      setState(() {
-                        _currentStep += 1;
-                        _errorMessage = '';
-                      });
-                    }
-                  } else {
-                    if (_formKey2.currentState!.validate()) {
-                      _formKey2.currentState!.save();
                       _errorMessage = '';
                     } else {
                       setState(() {
@@ -209,8 +191,19 @@ class RegisterViewState extends State<RegisterView> {
                               birthDate: birthdateController.text,
                               type: userTypeValue,
                               passwordConfirmation: passwordConfirmationController.text,
-                              avatar: null, // Handle avatar if necessary
+                              avatar: null,
                             );
+                            print(registerModel.firstName);
+                            print(registerModel.lastName);
+                            print(registerModel.email);
+                            print(registerModel.password);
+                            print(registerModel.passwordConfirmation);
+                            print(registerModel.type);
+                            print(registerModel.about);
+                            print(registerModel.salary);
+                            print(registerModel.birthDate);
+                            print(registerModel.favoriteSocialMedia);
+                            print(registerModel.tags);
                             BlocProvider.of<RegisterCubit>(context).registerUser(registerModel);
                           } else {
                             customSnackBar(context, 'Fill the required fields');
