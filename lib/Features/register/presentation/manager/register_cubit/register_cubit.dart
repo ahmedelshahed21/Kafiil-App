@@ -16,28 +16,39 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       final request = http.MultipartRequest('POST', uri)
         ..headers['Accept'] = 'application/json'
-        ..headers['Accept-Language'] = 'ar';
+        ..headers['Accept-Language'] = 'ar'
+        ..headers['Content-Type'] = 'multipart/form-data';
 
-      // Ensure all fields are correctly populated
+      // Populate fields
       request.fields['first_name'] = registerModel.firstName;
       request.fields['last_name'] = registerModel.lastName;
       request.fields['about'] = registerModel.about;
+
+      // Add tags
       registerModel.tags.forEach((tag) {
-        request.fields.addAll({'tags[]': tag.toString()});
+        request.fields['tags[]'] = tag.toString();
       });
+
+      // Add favorite social media
       registerModel.favoriteSocialMedia.forEach((socialMedia) {
-        request.fields.addAll({'favorite_social_media[]': socialMedia});
+        request.fields['favorite_social_media[]'] = socialMedia;
       });
+
       request.fields['salary'] = registerModel.salary.toString();
       request.fields['password'] = registerModel.password;
       request.fields['email'] = registerModel.email;
       request.fields['birth_date'] = registerModel.birthDate;
-      request.fields['gender'] = registerModel.gender != null ? (registerModel.gender! ? '1' : '0') : '';
+
+      if (registerModel.gender != null) {
+        request.fields['gender'] = registerModel.gender! ? '1' : '0';
+      }
+
       request.fields['type'] = registerModel.type.toString();
       request.fields['password_confirmation'] = registerModel.passwordConfirmation;
 
+      // Add avatar file if available
       if (registerModel.avatar != null) {
-        request.files.add(await http.MultipartFile.fromPath('avatar', registerModel.avatar!));
+        request.files.add(await http.MultipartFile.fromPath('avatar', registerModel.avatar!.path));
       }
 
       final response = await request.send();

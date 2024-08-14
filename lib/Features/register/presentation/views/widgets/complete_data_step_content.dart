@@ -279,6 +279,11 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       onConfirm: (values) {
                         setState(() {
                           selectedSkills = values.cast<String>();
+                          for(int i=0;i<selectedSkills.length;i++){
+                            if(selectedSkills[i]==dependencies!.tags[i].label){
+                              tags.add(dependencies!.tags[i].value);
+                            }
+                          }
                         });
                       },
                       chipDisplay: MultiSelectChipDisplay(
@@ -320,10 +325,10 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   setState(() {
                     isFacebookSelected = !isFacebookSelected;
                     if (isFacebookSelected == true) {
-                      selectedSocialMedia.add('facebook');
+                      favouriteSocialMedia.add('facebook');
                     }
                     if (isFacebookSelected == false) {
-                      selectedSocialMedia.remove('facebook');
+                      favouriteSocialMedia.remove('facebook');
                     }
                   });
                 },
@@ -339,10 +344,10 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           setState(() {
                             isFacebookSelected = value!;
                             if (isFacebookSelected == true) {
-                              selectedSocialMedia.add('facebook');
+                              favouriteSocialMedia.add('facebook');
                             }
                             if (isFacebookSelected == false) {
-                              selectedSocialMedia.remove('facebook');
+                              favouriteSocialMedia.remove('facebook');
                             }
                           });
                         },
@@ -365,10 +370,10 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   setState(() {
                     isXSelected=!isXSelected;
                     if (isXSelected == true) {
-                      selectedSocialMedia.add('x');
+                      favouriteSocialMedia.add('x');
                     }
                     if (isXSelected == false) {
-                      selectedSocialMedia.remove('x');
+                      favouriteSocialMedia.remove('x');
                     }
                   });
                 },
@@ -384,10 +389,10 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           setState(() {
                             isXSelected = value!;
                             if (isXSelected == true) {
-                              selectedSocialMedia.add('x');
+                              favouriteSocialMedia.add('x');
                             }
                             if (isXSelected == false) {
-                              selectedSocialMedia.remove('x');
+                              favouriteSocialMedia.remove('x');
                             }
                           });
                         },
@@ -407,10 +412,10 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   setState(() {
                     isInstagramSelected=!isInstagramSelected;
                     if (isInstagramSelected == true) {
-                      selectedSocialMedia.add('instagram');
+                      favouriteSocialMedia.add('instagram');
                     }
                     if (isInstagramSelected == false) {
-                      selectedSocialMedia.remove('instagram');
+                      favouriteSocialMedia.remove('instagram');
                     }
                   });
                 },
@@ -426,10 +431,10 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           setState(() {
                             isInstagramSelected = value!;
                             if (isInstagramSelected == true) {
-                              selectedSocialMedia.add('instagram');
+                              favouriteSocialMedia.add('instagram');
                             }
                             if (isInstagramSelected == false) {
-                              selectedSocialMedia.remove('instagram');
+                              favouriteSocialMedia.remove('instagram');
                             }
                           });
                         },
@@ -467,8 +472,8 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                               firstName: firstNameController.text,
                               lastName: lastNameController.text,
                               about: aboutController.text,
-                              tags: [30],
-                              favoriteSocialMedia: selectedSocialMedia.toList(),
+                              tags: tags,
+                              favoriteSocialMedia: favouriteSocialMedia.toList(),
                               salary: counter,
                               password: passwordController.text,
                               email: emailAddressController.text,
@@ -476,7 +481,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                               type: userTypeValue,
                               gender: gender,
                               passwordConfirmation: passwordConfirmationController.text,
-                              avatar: null,
+                              avatar: avatar,
                             );
                             print(registerModel.firstName);
                             print(registerModel.lastName);

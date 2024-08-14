@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/core/shared_components/back_icon_button.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_button.dart';
@@ -17,11 +19,13 @@ TextEditingController aboutController=TextEditingController();
 TextEditingController birthdateController = TextEditingController();
 bool gender = false;
 int counter = 100;
-Set<String> selectedSocialMedia = {'facebook'};
+Set<String> favouriteSocialMedia = {'facebook'};
 List<String> selectedSkills = [];
+List<int> tags=[];
 bool isFacebookSelected = true;
 bool isXSelected = false;
 bool isInstagramSelected = false;
+File? avatar;
 
 
 

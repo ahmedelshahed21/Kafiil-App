@@ -34,12 +34,14 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
                 child: CustomTextFormField(
                   fieldName: 'First Name',
                   controller: firstNameController,
+                  maxLength: 50,
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: CustomTextFormField(
                   fieldName: 'Last Name',
+                  maxLength: 50,
                   controller: lastNameController,
                 ),
               ),
