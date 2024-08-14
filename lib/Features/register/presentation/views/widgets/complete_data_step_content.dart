@@ -65,9 +65,6 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
   @override
   Widget build(BuildContext context) {
 
-
-
-
     List<MultiSelectItem<String>> skillItems = dependencies!.tags
         .map((tag) => MultiSelectItem<String>(tag.label, tag.label))
         .toList();
@@ -282,12 +279,8 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         setState(() {
                           selectedSkills = values.cast<String>();
                           print(selectedSkills);
-                          for(int i=0;i<selectedSkills.length;i++){
-                            if(selectedSkills[i]==dependencies!.tags[i].label){
-                              tags.add(dependencies!.tags[i].value);
-                              print(dependencies!.tags[i].value);
-                            }
-                          }
+                          print('1000000000000000000000000000');
+
                         });
                       },
                       chipDisplay: MultiSelectChipDisplay(
@@ -300,6 +293,13 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           });
                         },
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Skills is required';
+                        }
+                        return null;
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       itemsTextStyle: StylesApp.styleMedium12(context)
                           .copyWith(color: kPrimary900Color),
                       selectedItemsTextStyle: StylesApp.styleMedium12(context)
@@ -490,12 +490,19 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         text: 'Submit',
                         onPressed: () {
                           if (_formKey2.currentState!.validate()) {
-                            RegisterModel registerModel;
+                           if (dependencies != null) {
+                             for (int i = 0; i < dependencies!.tags.length; i++) {
+                               if (selectedSkills.contains(dependencies!.tags[i].label)) {
+                                 tags.add(dependencies!.tags[i].value);
+                               }
+                             }
+                           }
+                           RegisterModel registerModel;
                             registerModel = RegisterModel(
                               firstName: firstNameController.text,
                               lastName: lastNameController.text,
                               about: aboutController.text,
-                              tags: [35,33,2],
+                              tags: tags,
                               favoriteSocialMedia: favouriteSocialMedia,
                               salary: counter,
                               password: passwordController.text,
