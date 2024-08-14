@@ -112,7 +112,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                   BlocProvider.of<LoginCubit>(context).loginUser(emailController.text, passwordController.text);
                 }
                 else{
-                  customSnackBar(context, 'Invalid Values');
+                  customSnackBar(context, 'Fill the required fields');
                 }
               },
             ),

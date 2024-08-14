@@ -26,13 +26,12 @@ class CompleteDataStepContent extends StatefulWidget {
   const CompleteDataStepContent({super.key});
 
   @override
-  State<CompleteDataStepContent> createState() =>
-      _CompleteDataStepContentState();
+  State<CompleteDataStepContent> createState() => _CompleteDataStepContentState();
 }
 
 class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
   late DependenciesRepoImpl dependenciesRepo;
-  DependenciesModel? dependencies;
+  late DependenciesModel? dependencies;
   bool isLoading = true;
   String? errorMessage;
   final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
@@ -278,8 +277,8 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       onConfirm: (values) {
                         setState(() {
                           selectedSkills = values.cast<String>();
-                          print(selectedSkills);
-                          print('1000000000000000000000000000');
+                          // print(selectedSkills);
+                          // print('1000000000000000000000000000');
 
                         });
                       },
@@ -513,18 +512,19 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                               passwordConfirmation: passwordConfirmationController.text,
                               avatar: avatar,
                             );
-                            print(registerModel.firstName);
-                            print(registerModel.lastName);
-                            print(registerModel.email);
-                            print(registerModel.password);
-                            print(registerModel.passwordConfirmation);
-                            print(registerModel.type);
-                            print(registerModel.about);
-                            print(registerModel.salary);
-                            print(registerModel.birthDate);
-                            print(registerModel.favoriteSocialMedia);
-                            print(registerModel.tags);
-                            print(registerModel.gender);
+
+                            // print(registerModel.firstName);
+                            // print(registerModel.lastName);
+                            // print(registerModel.email);
+                            // print(registerModel.password);
+                            // print(registerModel.passwordConfirmation);
+                            // print(registerModel.type);
+                            // print(registerModel.about);
+                            // print(registerModel.salary);
+                            // print(registerModel.birthDate);
+                            // print(registerModel.favoriteSocialMedia);
+                            // print(registerModel.tags);
+                            // print(registerModel.gender);
                             BlocProvider.of<RegisterCubit>(context)
                                 .registerUser(registerModel);
 
@@ -542,10 +542,15 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   isLoading = true;
                 } else if (state is RegisterSuccessState) {
                   isLoading = false;
+                  customSnackBar(context, 'Success! Registration Complete.',
+                    icon: Icons.check_circle,
+                    iconColor: kPrimary900Color,
+                    textStyle: StylesApp.styleSemiBold14(context).copyWith(color: Colors.greenAccent)
+                  );
                   GoRouter.of(context).pop();
                 } else if (state is RegisterFailureState) {
                   isLoading = false;
-                  customSnackBar(context, '${state.errorMessage.toString()}');
+                  customSnackBar(context,state.errorMessage.toString(),iconColor: Colors.red, icon: FontAwesomeIcons.exclamation, customDuration:3);
                 }
               },
             ),

@@ -60,7 +60,27 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterSuccessState());
       } else {
         final Map<String, dynamic> responseData = json.decode(responseBody);
-        emit(RegisterFailureState(responseData['message'] ?? 'Registration failed'));
+
+        if (responseData.containsKey('errors')) {
+          // Assuming 'errors' is a map or a list of errors
+          final errors = responseData['errors'];
+          String firstErrorMessage;
+
+          if (errors is Map) {
+            // Extract the first error message from the map
+            firstErrorMessage = errors.values.first[0];
+          } else if (errors is List) {
+            // If errors is a list, take the first message
+            firstErrorMessage = errors.first.toString();
+          } else {
+            // Fallback error message
+            firstErrorMessage = 'Unknown error occurred';
+          }
+
+          emit(RegisterFailureState(firstErrorMessage));
+        } else {
+          emit(RegisterFailureState(responseData['message'] ?? 'Registration failed'));
+        }
       }
     } catch (error) {
       emit(RegisterFailureState(error.toString()));

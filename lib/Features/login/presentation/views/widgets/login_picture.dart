@@ -10,7 +10,7 @@ class LoginPicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: 225,
         maxWidth: 225,
       ),

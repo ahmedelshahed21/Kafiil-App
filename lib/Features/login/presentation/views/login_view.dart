@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kafiil_app/Features/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:kafiil_app/Features/login/presentation/manager/login_cubit/login_state.dart';
@@ -69,7 +70,11 @@ class _LoginViewState extends State<LoginView> {
               GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
               isLoading = false;
             } else {
-              customSnackBar(context, 'Email Address or Password is Wrong');
+              customSnackBar(context, 'Email Address or Password is Wrong',
+                  iconColor: Colors.red,
+                  icon: FontAwesomeIcons.exclamation,
+                  customDuration: 3
+              );
               isLoading = false;
             }
           }

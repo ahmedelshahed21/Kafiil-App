@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:kafiil_app/core/utils/styles_app.dart';
 
 
-void customSnackBar(BuildContext context, String message,
-    {IconData? icon, Color? iconColor}) {
+void customSnackBar(BuildContext context, String message, {IconData? icon, Color? iconColor, TextStyle? textStyle,int? customDuration}) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      backgroundColor: Colors.black.withOpacity(0.7),
+      backgroundColor: Colors.black.withOpacity(0.8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(100),
       ),
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-      duration: const Duration(seconds: 2),
+      duration: Duration(seconds: customDuration??2),
       content: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -22,11 +21,13 @@ void customSnackBar(BuildContext context, String message,
               color: iconColor ?? Colors.yellow,
               size: 30,
             ),
-            const SizedBox(width: 10,),
+            const SizedBox(width: 5),
             Flexible(
-              child: Text(message,
-                  style: StylesApp.styleMedium12(context)
-                      .copyWith(color: Colors.yellow)),
+              child: FittedBox(
+                child: Text(message,
+                    style: textStyle ?? StylesApp.styleSemiBold14(context).copyWith(color: Colors.yellowAccent)
+                ),
+              ),
             ),
           ],
         ),
