@@ -6,8 +6,6 @@ import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
 
 class RegisterStepContent extends StatefulWidget {
 
-
-
   final GlobalKey<FormState> formKey;
   const RegisterStepContent({super.key, required this.formKey});
 
@@ -18,8 +16,6 @@ class RegisterStepContent extends StatefulWidget {
 class _RegisterStepContentState extends State<RegisterStepContent> {
   bool isPasswordSecure = true;
   bool isConfirmationPasswordSecure = true;
-
-
 
   @override
   Widget build(BuildContext context) {

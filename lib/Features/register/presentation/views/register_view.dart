@@ -154,17 +154,10 @@ class RegisterViewState extends State<RegisterView> {
     );
   }
 
-
-
-
-
-  bool isLoading=false;
   Widget stepperControl(BuildContext context, ControlsDetails details) {
     return Row(
       children: [
         if (_currentStep < 1)
-
-
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: MediaQuery.sizeOf(context).width * 0.4),

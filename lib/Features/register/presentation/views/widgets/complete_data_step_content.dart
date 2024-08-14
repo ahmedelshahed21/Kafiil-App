@@ -107,6 +107,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CustomFloatingActionButton(
+                        heroTag: 'minus',
                         onPressed: () {
                           setState(() {
                             if (counter > 100) {
@@ -126,6 +127,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       ),
                     ),
                     CustomFloatingActionButton(
+                        heroTag: 'plus',
                         onPressed: () {
                           setState(() {
                             if (counter < 1000) {
