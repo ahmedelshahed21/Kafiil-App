@@ -8,7 +8,6 @@ import 'package:kafiil_app/Features/home/presentation/manager/countries_cubit/co
 import 'package:kafiil_app/Features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/products_cubit/products_cubit.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/who_am_i_cubit/who_am_i_cubit.dart';
-import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:kafiil_app/core/utils/app_router.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/core/utils/service_locator.dart';

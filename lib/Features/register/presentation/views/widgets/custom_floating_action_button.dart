@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomFloatingActionButton extends StatelessWidget{
-  const CustomFloatingActionButton({super.key, required this.child, this.onPressed});
+  const CustomFloatingActionButton({super.key, required this.child, this.onPressed, this.heroTag});
   final Widget? child;
+  final Object? heroTag;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+        heroTag: heroTag,
         elevation: 1.5,
         mini: true,
         backgroundColor: Colors.white,

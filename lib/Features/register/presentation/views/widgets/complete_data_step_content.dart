@@ -279,9 +279,11 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       onConfirm: (values) {
                         setState(() {
                           selectedSkills = values.cast<String>();
+                          print(selectedSkills);
                           for(int i=0;i<selectedSkills.length;i++){
                             if(selectedSkills[i]==dependencies!.tags[i].label){
                               tags.add(dependencies!.tags[i].value);
+                              print(dependencies!.tags[i].value);
                             }
                           }
                         });
@@ -290,7 +292,6 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         chipColor: kPrimary100Color,
                         textStyle: StylesApp.styleMedium12(context)
                             .copyWith(color: kPrimary900Color),
-                        // Set the text color here
                         onTap: (value) {
                           setState(() {
                             selectedSkills.remove(value);
@@ -325,10 +326,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   setState(() {
                     isFacebookSelected = !isFacebookSelected;
                     if (isFacebookSelected == true) {
-                      favouriteSocialMedia.add('facebook');
-                    }
-                    if (isFacebookSelected == false) {
-                      favouriteSocialMedia.remove('facebook');
+                      isInstagramSelected=false;
+                      isXSelected=false;
+                      favouriteSocialMedia[0]='facebook';
                     }
                   });
                 },
@@ -344,10 +344,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           setState(() {
                             isFacebookSelected = value!;
                             if (isFacebookSelected == true) {
-                              favouriteSocialMedia.add('facebook');
-                            }
-                            if (isFacebookSelected == false) {
-                              favouriteSocialMedia.remove('facebook');
+                              isInstagramSelected=false;
+                              isXSelected=false;
+                              favouriteSocialMedia[0]='facebook';
                             }
                           });
                         },
@@ -370,10 +369,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   setState(() {
                     isXSelected=!isXSelected;
                     if (isXSelected == true) {
-                      favouriteSocialMedia.add('x');
-                    }
-                    if (isXSelected == false) {
-                      favouriteSocialMedia.remove('x');
+                      isInstagramSelected=false;
+                      isFacebookSelected=false;
+                      favouriteSocialMedia[0]='x';
                     }
                   });
                 },
@@ -389,10 +387,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           setState(() {
                             isXSelected = value!;
                             if (isXSelected == true) {
-                              favouriteSocialMedia.add('x');
-                            }
-                            if (isXSelected == false) {
-                              favouriteSocialMedia.remove('x');
+                              isInstagramSelected=false;
+                              isFacebookSelected=false;
+                              favouriteSocialMedia[0]='x';
                             }
                           });
                         },
@@ -412,11 +409,11 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   setState(() {
                     isInstagramSelected=!isInstagramSelected;
                     if (isInstagramSelected == true) {
-                      favouriteSocialMedia.add('instagram');
+                      isXSelected=false;
+                      isFacebookSelected=false;
+                      favouriteSocialMedia[0]='instagram';
                     }
-                    if (isInstagramSelected == false) {
-                      favouriteSocialMedia.remove('instagram');
-                    }
+
                   });
                 },
                 child: Container(
@@ -431,10 +428,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           setState(() {
                             isInstagramSelected = value!;
                             if (isInstagramSelected == true) {
-                              favouriteSocialMedia.add('instagram');
-                            }
-                            if (isInstagramSelected == false) {
-                              favouriteSocialMedia.remove('instagram');
+                              isXSelected=false;
+                              isFacebookSelected=false;
+                              favouriteSocialMedia[0]='instagram';
                             }
                           });
                         },
@@ -459,21 +455,46 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             create: (context) => RegisterCubit(),
             child: BlocConsumer<RegisterCubit, RegisterState>(
               builder: (context, state) {
-                return Center(
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.09,
-                    width: double.infinity,
-                    child: CustomTextButton(
-                      text: 'Submit',
-                      onPressed: () {
-                        if (_formKey2.currentState!.validate()) {
+                if (state is RegisterLoadingState){
+                  return Center(
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.09,
+                      width: double.infinity,
+                      child: const CustomTextButton(
+                        child: CircularProgressIndicator(
+                          color: kBackgroundColor,
+                        )
+                      ),
+                    ),
+                  );
+                }
+                else if(state is RegisterSuccessState){
+                  return Center(
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.09,
+                      width: double.infinity,
+                      child: const CustomTextButton(
+                        text: 'Submit',
+                      ),
+                    ),
+                  );
+                }
+                else{
+                  return Center(
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.09,
+                      width: double.infinity,
+                      child: CustomTextButton(
+                        text: 'Submit',
+                        onPressed: () {
+                          if (_formKey2.currentState!.validate()) {
                             RegisterModel registerModel;
                             registerModel = RegisterModel(
                               firstName: firstNameController.text,
                               lastName: lastNameController.text,
                               about: aboutController.text,
-                              tags: tags,
-                              favoriteSocialMedia: favouriteSocialMedia.toList(),
+                              tags: [35,33,2],
+                              favoriteSocialMedia: favouriteSocialMedia,
                               salary: counter,
                               password: passwordController.text,
                               email: emailAddressController.text,
@@ -498,13 +519,14 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                             BlocProvider.of<RegisterCubit>(context)
                                 .registerUser(registerModel);
 
-                        } else {
-                          customSnackBar(context, 'Fill the required fields');
-                        }
-                      },
+                          } else {
+                            customSnackBar(context, 'Fill the required fields');
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               },
               listener: (context, state) {
                 if (state is RegisterLoadingState) {
