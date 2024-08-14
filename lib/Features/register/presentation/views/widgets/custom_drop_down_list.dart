@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/core/functions/outline_input_border.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
 import 'package:kafiil_app/core/utils/styles_app.dart';
@@ -13,7 +14,7 @@ class CustomDropDownList extends StatefulWidget {
 class _CustomDropDownListState extends State<CustomDropDownList> {
   final List<String> userTypes = ['buyer', 'seller', 'both'];
   String? userType;
-  int userTypeValue=1;
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +58,9 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
               // Map the selected value to the corresponding integer
               if (userType == 'buyer') {
                 userTypeValue = 1;
-              } else if (userType == 'seller') {
+              } if (userType == 'seller') {
                 userTypeValue = 2;
-              } else if (userType == 'both') {
+              } if (userType == 'both') {
                 userTypeValue = 3;
               }
             });
@@ -72,15 +73,16 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
             return null;
           },
           onSaved: (value) {
-            userType = value;
-            // Map the saved value to the corresponding integer
-            if (userType == 'Buyer') {
-              userTypeValue = 1;
-            } else if (userType == 'Seller') {
-              userTypeValue = 2;
-            } else if (userType == 'Both') {
-              userTypeValue = 3;
-            }
+            setState(() {
+              userType = value;
+              if (userType == 'buyer') {
+                userTypeValue = 1;
+              } if (userType == 'seller') {
+                userTypeValue = 2;
+              } if (userType == 'both') {
+                userTypeValue = 3;
+              }
+            });
           },
         ),
       ],

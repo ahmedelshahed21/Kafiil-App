@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:kafiil_app/Features/register/data/models/register_model.dart';
+import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_cubit.dart';
+import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_state.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/Features/register/presentation/views/widgets/add_avatar.dart';
+import 'package:kafiil_app/core/functions/custom_snack_bar.dart';
 import 'package:kafiil_app/core/models/dependencies_model.dart';
 import 'package:kafiil_app/core/repos/dependencies_repo.dart';
+import 'package:kafiil_app/core/shared_components/custom_text_button.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:kafiil_app/core/utils/assets_app.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
@@ -17,23 +23,19 @@ import 'package:kafiil_app/features/register/presentation/views/widgets/custom_f
 import 'package:http/http.dart' as http;
 
 class CompleteDataStepContent extends StatefulWidget {
-  final Key formKey;
-  const CompleteDataStepContent({super.key,required this.formKey});
+  const CompleteDataStepContent({super.key});
 
   @override
   State<CompleteDataStepContent> createState() =>
       _CompleteDataStepContentState();
 }
 
-
-
-
 class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
-
   late DependenciesRepoImpl dependenciesRepo;
   DependenciesModel? dependencies;
   bool isLoading = true;
   String? errorMessage;
+  final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -62,24 +64,16 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
 
   @override
   Widget build(BuildContext context) {
-    if(isFacebookSelected==true){
-      selectedSocialMedia.add('facebook');
-    }
-    if(isXSelected==true){
-      selectedSocialMedia.add('x');
-    }
-    if(isInstagramSelected==true){
-      selectedSocialMedia.add('instagram');
-    }
+
+
 
 
     List<MultiSelectItem<String>> skillItems = dependencies!.tags
         .map((tag) => MultiSelectItem<String>(tag.label, tag.label))
         .toList();
 
-
     return Form(
-      key: widget.formKey,
+      key: _formKey2,
       child: Column(
         children: [
           const AddAvatar(),
@@ -92,8 +86,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'About is required';
-              }
-              else if(value.length<10) {
+              } else if (value.length < 10) {
                 return 'About must be at least 8 characters long';
               }
               return null;
@@ -135,7 +128,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                     CustomFloatingActionButton(
                         onPressed: () {
                           setState(() {
-                            if(counter<1000){
+                            if (counter < 1000) {
                               counter += 100;
                             }
                           });
@@ -154,6 +147,20 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
           CustomTextFormField(
             fieldName: 'Birth Date',
             controller: birthdateController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'BirthDate is required';
+              }
+              final selectedDate = DateTime.parse(value);
+              final today = DateTime.now();
+              if (selectedDate.year == today.year &&
+                  selectedDate.month == today.month &&
+                  selectedDate.day == today.day) {
+                return 'Birth date cannot be today';
+              }
+
+              return null;
+            },
             onTap: () async {
               DateTime? pickedDate = await showDatePicker(
                 context: context,
@@ -161,10 +168,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
               );
-              if (pickedDate != null) {
+              if (pickedDate != null && pickedDate != DateTime.now()) {
                 setState(() {
-                  birthdateController.text =
-                      DateFormat('yyyy-MM-dd').format(pickedDate);
+                  birthdateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
                 });
               }
             },
@@ -174,6 +180,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             ),
             readOnly: true,
           ),
+
           const SizedBox(height: 12.0),
           Column(
             children: [
@@ -188,9 +195,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
-                        gender=false;
+                        gender = false;
                       });
                     },
                     child: Row(
@@ -212,9 +219,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
-                        gender=true;
+                        gender = true;
                       });
                     },
                     child: Row(
@@ -271,7 +278,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       items: skillItems,
                       onConfirm: (values) {
                         setState(() {
-                          selectedSkills = values.cast<int>();
+                          selectedSkills = values.cast<String>();
                         });
                       },
                       chipDisplay: MultiSelectChipDisplay(
@@ -285,7 +292,6 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                           });
                         },
                       ),
-
                       itemsTextStyle: StylesApp.styleMedium12(context)
                           .copyWith(color: kPrimary900Color),
                       selectedItemsTextStyle: StylesApp.styleMedium12(context)
@@ -313,6 +319,12 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                 onTap: () {
                   setState(() {
                     isFacebookSelected = !isFacebookSelected;
+                    if (isFacebookSelected == true) {
+                      selectedSocialMedia.add('facebook');
+                    }
+                    if (isFacebookSelected == false) {
+                      selectedSocialMedia.remove('facebook');
+                    }
                   });
                 },
                 child: Container(
@@ -326,10 +338,17 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         onChanged: (value) {
                           setState(() {
                             isFacebookSelected = value!;
+                            if (isFacebookSelected == true) {
+                              selectedSocialMedia.add('facebook');
+                            }
+                            if (isFacebookSelected == false) {
+                              selectedSocialMedia.remove('facebook');
+                            }
                           });
                         },
                       ),
-                      const Icon(FontAwesomeIcons.facebook,
+                      const Icon(
+                        FontAwesomeIcons.facebook,
                         color: Colors.blueAccent,
                       ),
                       const SizedBox(width: 5),
@@ -344,7 +363,13 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    isXSelected = !isXSelected;
+                    isXSelected=!isXSelected;
+                    if (isXSelected == true) {
+                      selectedSocialMedia.add('x');
+                    }
+                    if (isXSelected == false) {
+                      selectedSocialMedia.remove('x');
+                    }
                   });
                 },
                 child: Container(
@@ -358,6 +383,12 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         onChanged: (value) {
                           setState(() {
                             isXSelected = value!;
+                            if (isXSelected == true) {
+                              selectedSocialMedia.add('x');
+                            }
+                            if (isXSelected == false) {
+                              selectedSocialMedia.remove('x');
+                            }
                           });
                         },
                       ),
@@ -372,9 +403,15 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
+                onTap: (){
                   setState(() {
-                    isInstagramSelected = !isInstagramSelected;
+                    isInstagramSelected=!isInstagramSelected;
+                    if (isInstagramSelected == true) {
+                      selectedSocialMedia.add('instagram');
+                    }
+                    if (isInstagramSelected == false) {
+                      selectedSocialMedia.remove('instagram');
+                    }
                   });
                 },
                 child: Container(
@@ -388,6 +425,12 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         onChanged: (value) {
                           setState(() {
                             isInstagramSelected = value!;
+                            if (isInstagramSelected == true) {
+                              selectedSocialMedia.add('instagram');
+                            }
+                            if (isInstagramSelected == false) {
+                              selectedSocialMedia.remove('instagram');
+                            }
                           });
                         },
                       ),
@@ -407,12 +450,72 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             ],
           ),
           const SizedBox(height: 30),
+          BlocProvider(
+            create: (context) => RegisterCubit(),
+            child: BlocConsumer<RegisterCubit, RegisterState>(
+              builder: (context, state) {
+                return Center(
+                  child: SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.09,
+                    width: double.infinity,
+                    child: CustomTextButton(
+                      text: 'Submit',
+                      onPressed: () {
+                        if (_formKey2.currentState!.validate()) {
+                            RegisterModel registerModel;
+                            registerModel = RegisterModel(
+                              firstName: firstNameController.text,
+                              lastName: lastNameController.text,
+                              about: aboutController.text,
+                              tags: [30],
+                              favoriteSocialMedia: selectedSocialMedia.toList(),
+                              salary: counter,
+                              password: passwordController.text,
+                              email: emailAddressController.text,
+                              birthDate: birthdateController.text,
+                              type: userTypeValue,
+                              gender: gender,
+                              passwordConfirmation: passwordConfirmationController.text,
+                              avatar: null,
+                            );
+                            print(registerModel.firstName);
+                            print(registerModel.lastName);
+                            print(registerModel.email);
+                            print(registerModel.password);
+                            print(registerModel.passwordConfirmation);
+                            print(registerModel.type);
+                            print(registerModel.about);
+                            print(registerModel.salary);
+                            print(registerModel.birthDate);
+                            print(registerModel.favoriteSocialMedia);
+                            print(registerModel.tags);
+                            print(registerModel.gender);
+                            BlocProvider.of<RegisterCubit>(context)
+                                .registerUser(registerModel);
 
-
-
+                        } else {
+                          customSnackBar(context, 'Fill the required fields');
+                        }
+                      },
+                    ),
+                  ),
+                );
+              },
+              listener: (context, state) {
+                if (state is RegisterLoadingState) {
+                  isLoading = true;
+                } else if (state is RegisterSuccessState) {
+                  isLoading = false;
+                  GoRouter.of(context).pop();
+                } else if (state is RegisterFailureState) {
+                  isLoading = false;
+                  customSnackBar(context, '${state.errorMessage.toString()}');
+                }
+              },
+            ),
+          )
         ],
       ),
     );
-
   }
 }

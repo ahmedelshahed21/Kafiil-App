@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:kafiil_app/Features/register/data/models/register_model.dart';
-import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_cubit.dart';
-import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_state.dart';
-import 'package:kafiil_app/core/functions/custom_snack_bar.dart';
 import 'package:kafiil_app/core/shared_components/back_icon_button.dart';
 import 'package:kafiil_app/core/shared_components/custom_text_button.dart';
 import 'package:kafiil_app/core/utils/constants.dart';
@@ -18,17 +12,17 @@ TextEditingController lastNameController=TextEditingController();
 TextEditingController emailAddressController=TextEditingController();
 TextEditingController passwordController=TextEditingController();
 TextEditingController passwordConfirmationController=TextEditingController();
-int userTypeValue=1;
+int userTypeValue=0;
 TextEditingController aboutController=TextEditingController();
 TextEditingController birthdateController = TextEditingController();
 bool gender = false;
 int counter = 100;
-List<String> selectedSocialMedia = [];
-List<int> selectedSkills = [];
-bool isFacebookSelected = false;
+Set<String> selectedSocialMedia = {'facebook'};
+List<String> selectedSkills = [];
+bool isFacebookSelected = true;
 bool isXSelected = false;
 bool isInstagramSelected = false;
-late RegisterModel registerModel;
+
 
 
 class RegisterView extends StatefulWidget {
@@ -43,7 +37,7 @@ class RegisterViewState extends State<RegisterView> {
 
   int _currentStep = 0;
   final _formKey = GlobalKey<FormState>();
-  final _formKey2 = GlobalKey<FormState>();
+
   String _errorMessage = '';
 
 
@@ -132,20 +126,6 @@ class RegisterViewState extends State<RegisterView> {
   }
 
 
-
-  Step buildCompleteDataStep() {
-    return Step(
-      title: Text('Complete Data',
-        style: StylesApp.styleSemiBold12(context),
-      ),
-      content: CompleteDataStepContent(
-        formKey: _formKey2,
-      ),
-      isActive: _currentStep >= 1,
-      state: _currentStep >= 1 ? StepState.indexed : StepState.disabled,
-    );
-  }
-
   Step buildRegisterStep() {
     return Step(
       title: Text('Register',
@@ -159,75 +139,28 @@ class RegisterViewState extends State<RegisterView> {
     );
   }
 
+  Step buildCompleteDataStep() {
+    return Step(
+      title: Text('Complete Data',
+        style: StylesApp.styleSemiBold12(context),
+      ),
+      content: const CompleteDataStepContent(),
+      isActive: _currentStep >= 1,
+      state: _currentStep >= 1 ? StepState.indexed : StepState.disabled,
+    );
+  }
+
+
+
 
 
   bool isLoading=false;
   Widget stepperControl(BuildContext context, ControlsDetails details) {
     return Row(
       children: [
-        if (_currentStep == 1)
-          BlocProvider(
-            create: (context) => RegisterCubit(),
-            child: BlocConsumer<RegisterCubit, RegisterState>(
-              builder: (context, state) {
-                return Expanded(
-                  child: Center(
-                    child: SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.09,
-                      width: double.infinity,
-                      child: CustomTextButton(
-                        text: 'Submit',
-                        onPressed: () {
-                          if (_formKey2.currentState!.validate()) {
-                            registerModel = RegisterModel(
-                              firstName: firstNameController.text,
-                              lastName: lastNameController.text,
-                              about: aboutController.text,
-                              tags: selectedSkills,
-                              favoriteSocialMedia: selectedSocialMedia,
-                              salary: counter,
-                              password: passwordController.text,
-                              email: emailAddressController.text,
-                              birthDate: birthdateController.text,
-                              type: userTypeValue,
-                              passwordConfirmation: passwordConfirmationController.text,
-                              avatar: null,
-                            );
-                            print(registerModel.firstName);
-                            print(registerModel.lastName);
-                            print(registerModel.email);
-                            print(registerModel.password);
-                            print(registerModel.passwordConfirmation);
-                            print(registerModel.type);
-                            print(registerModel.about);
-                            print(registerModel.salary);
-                            print(registerModel.birthDate);
-                            print(registerModel.favoriteSocialMedia);
-                            print(registerModel.tags);
-                            BlocProvider.of<RegisterCubit>(context).registerUser(registerModel);
-                          } else {
-                            customSnackBar(context, 'Fill the required fields');
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                );
-              },
-              listener: (context, state) {
-                if (state is RegisterLoadingState) {
-                  isLoading = true;
-                } else if (state is RegisterSuccessState) {
-                  isLoading = false;
-                  GoRouter.of(context).pop();
-                } else if (state is RegisterFailureState) {
-                  isLoading = false;
-                  customSnackBar(context, 'The given data was invalid');
-                }
-              },
-            ),
-          )
-        else
+        if (_currentStep < 1)
+
+
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: MediaQuery.sizeOf(context).width * 0.4),
