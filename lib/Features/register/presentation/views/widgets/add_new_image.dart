@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+
 
 class AddNewImage extends StatelessWidget{
   const AddNewImage({super.key,this.image});
@@ -10,7 +11,7 @@ class AddNewImage extends StatelessWidget{
     return Stack(
       children: [
         CircleAvatar(
-          backgroundColor: kGrey50Color,
+          backgroundColor: AppColors.kGrey50Color,
           backgroundImage: NetworkImage(image??''),
           radius: 41.5,
         ),
@@ -22,7 +23,7 @@ class AddNewImage extends StatelessWidget{
               //buildImageBottomSheet(context);
             },
             child: const CircleAvatar(
-              backgroundColor: kPrimary900Color,
+              backgroundColor: AppColors.kPrimary900Color,
               radius: 12,
               child: Icon(Icons.add,
                 size: 20,

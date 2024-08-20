@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/popular_services_list_view.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/features/home/presentation/views/widgets/services_list_view.dart';
 
 class ServicesView extends StatelessWidget{
@@ -16,11 +17,11 @@ class ServicesView extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Services', style: StylesApp.styleSemiBold18(context)),
+            Text(AppStrings.services, style: AppStyles.styleSemiBold18(context)),
             const SizedBox(height: 50),
             const ServicesListView(),
             const SizedBox(height: 35),
-            Text('Popular Services', style: StylesApp.styleSemiBold18(context)),
+            Text(AppStrings.popularServices, style: AppStyles.styleSemiBold18(context)),
             const SizedBox(height: 30),
             const PopularServicesListView()
           ],

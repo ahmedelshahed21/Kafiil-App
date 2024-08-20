@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
 
-abstract class StylesApp {
+
+abstract class AppStyles {
   static TextStyle styleSemiBold18(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 18),
         fontWeight: FontWeight.w600,
         fontFamily: 'Montserrat',
-        color: kGrey900Color
+        color: AppColors.kGrey900Color
     );
   }
 
@@ -16,7 +17,7 @@ abstract class StylesApp {
         fontSize: getResponsiveFontSize(context, fontSize: 14),
         fontWeight: FontWeight.w600,
         fontFamily: 'Montserrat',
-        color: kPrimary900Color
+        color: AppColors.kPrimary900Color
     );
   }
 
@@ -25,7 +26,7 @@ abstract class StylesApp {
         fontSize: getResponsiveFontSize(context, fontSize: 12),
         fontWeight: FontWeight.w600,
         fontFamily: 'Montserrat',
-        color: kGrey900Color
+        color: AppColors.kGrey900Color
     );
   }
 
@@ -43,7 +44,7 @@ abstract class StylesApp {
         fontSize: getResponsiveFontSize(context, fontSize: 15),
         fontWeight: FontWeight.w500,
       fontFamily: 'Montserrat',
-      color: kBackgroundColor,
+      color: AppColors.kBackgroundColor
     );
   }
 
@@ -52,7 +53,7 @@ abstract class StylesApp {
       fontSize: getResponsiveFontSize(context, fontSize: 14),
       fontWeight: FontWeight.w500,
       fontFamily: 'Montserrat',
-      color: kGrey900Color,
+      color: AppColors.kGrey900Color
     );
   }
 
@@ -61,7 +62,7 @@ abstract class StylesApp {
       fontSize: getResponsiveFontSize(context, fontSize: 12),
       fontWeight: FontWeight.w500,
       fontFamily: 'Montserrat',
-      color: kGrey500Color,
+      color: AppColors.kGrey500Color
     );
   }
 

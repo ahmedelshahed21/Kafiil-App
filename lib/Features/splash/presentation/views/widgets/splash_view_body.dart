@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kafiil_app/Features/splash/presentation/views/widgets/sliding_text.dart';
+import 'package:kafiil_app/core/constants/app_assets.dart';
 import 'package:kafiil_app/core/utils/app_router.dart';
-import 'package:kafiil_app/core/utils/assets_app.dart';
 
 class SplashViewBody extends StatefulWidget{
   const SplashViewBody({super.key});
@@ -36,7 +36,7 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-       Image.asset(ImagesApp.logoApp),
+       Image.asset(AppAssets.logoApp),
         const SizedBox(height: 5),
         SlidingText(slidingAnimation: slidingAnimation)
       ],

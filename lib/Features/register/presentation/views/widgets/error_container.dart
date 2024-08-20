@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 
 class ErrorContainer extends StatelessWidget {
   const ErrorContainer({
@@ -17,20 +17,20 @@ class ErrorContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
-          color: kError50Color, borderRadius: BorderRadius.circular(4)),
+          color: AppColors.kError50Color, borderRadius: BorderRadius.circular(4)),
       child: Row(
         children: [
           const Icon(
             Icons.error_outline,
-            color: kError300Color,
+            color: AppColors.kError300Color,
           ),
           const SizedBox(
             width: 10,
           ),
           Text(
             _errorMessage,
-            style: StylesApp.styleMedium12(context)
-                .copyWith(color: kError300Color),
+            style: AppStyles.styleMedium12(context)
+                .copyWith(color: AppColors.kError300Color),
           ),
         ],
       ),

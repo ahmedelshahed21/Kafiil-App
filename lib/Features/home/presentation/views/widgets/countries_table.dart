@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/home/data/models/country_model.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/country_data_source.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/constants/constants.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -51,7 +53,7 @@ class CountriesTableState extends State<CountriesTable> {
     return Theme(
       data: ThemeData.light().copyWith(
         colorScheme: const ColorScheme.light(
-            primary: kPrimary900Color, secondary: kBackgroundColor),
+            primary: AppColors.kPrimary900Color, secondary: AppColors.kBackgroundColor),
       ),
       child: LayoutBuilder(
         builder: (context, constraint) {
@@ -67,13 +69,13 @@ class CountriesTableState extends State<CountriesTable> {
                   data: SfDataPagerThemeData(
                     itemColor: Colors.white,
                     disabledItemColor: Colors.white,
-                    selectedItemColor: kPrimary900Color,
-                    selectedItemTextStyle: StylesApp.styleMedium14(context)
-                        .copyWith(color: kBackgroundColor),
+                    selectedItemColor: AppColors.kPrimary900Color,
+                    selectedItemTextStyle: AppStyles.styleMedium14(context)
+                        .copyWith(color: AppColors.kBackgroundColor),
                     itemBorderRadius: BorderRadius.circular(7),
-                    itemTextStyle: StylesApp.styleMedium14(context)
-                        .copyWith(color: kGrey800Color),
-                    itemBorderColor: kGrey200Color,
+                    itemTextStyle: AppStyles.styleMedium14(context)
+                        .copyWith(color: AppColors.kGrey900Color),
+                    itemBorderColor: AppColors.kGrey200Color,
                     itemBorderWidth: 1.5,
                   ),
                   child: SfDataPager(
@@ -101,11 +103,11 @@ class CountriesTableState extends State<CountriesTable> {
       columns: <GridColumn>[
         GridColumn(
           columnName: 'country',
-          label: buildLabel('Country', Alignment.center),
+          label: buildLabel(AppStrings.country, Alignment.center),
         ),
         GridColumn(
           columnName: 'capital',
-          label: buildLabel('Capital', Alignment.center),
+          label: buildLabel(AppStrings.capital, Alignment.center),
         ),
       ],
     );
@@ -116,15 +118,15 @@ class CountriesTableState extends State<CountriesTable> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       alignment: alignment,
       decoration: BoxDecoration(
-          color: kGrey50Color, borderRadius: BorderRadius.circular(10)),
+          color: AppColors.kGrey50Color, borderRadius: BorderRadius.circular(10)),
       child: Text(
         title,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(
           fontSize: 12,
-          color: kGrey500Color,
+          color: AppColors.kGrey500Color,
           fontWeight: FontWeight.w500,
-          fontFamily: 'Montserrat',
+          fontFamily: montserratFont,
         ),
       ),
     );

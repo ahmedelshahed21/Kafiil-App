@@ -5,22 +5,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:kafiil_app/Features/register/data/models/register_model.dart';
+import 'package:kafiil_app/Features/register/data/repos/register_repo_impl.dart';
 import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_state.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/Features/register/presentation/views/widgets/add_avatar.dart';
-import 'package:kafiil_app/core/functions/custom_snack_bar.dart';
-import 'package:kafiil_app/core/models/dependencies_model.dart';
-import 'package:kafiil_app/core/repos/dependencies_repo.dart';
-import 'package:kafiil_app/core/shared_components/custom_text_button.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:kafiil_app/core/utils/assets_app.dart';
-import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
-import 'package:kafiil_app/features/register/presentation/views/widgets/clickable_container.dart';
-import 'package:kafiil_app/features/register/presentation/views/widgets/custom_floating_action_button.dart';
-import 'package:http/http.dart' as http;
+import 'package:kafiil_app/Features/register/presentation/views/widgets/favourite_social_media_section.dart';
+import 'package:kafiil_app/Features/register/presentation/views/widgets/gender_section.dart';
+import 'package:kafiil_app/Features/register/presentation/views/widgets/salary_section.dart';
+import 'package:kafiil_app/Features/register/presentation/views/widgets/skills_section.dart';
+import 'package:kafiil_app/core/constants/app_assets.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/utils/helpers/functions/custom_snack_bar.dart';
+import 'package:kafiil_app/core/utils/widgets/custom_text_button.dart';
+import 'package:kafiil_app/core/utils/widgets/custom_text_form_field.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
+
 
 class CompleteDataStepContent extends StatefulWidget {
   const CompleteDataStepContent({super.key});
@@ -30,43 +31,10 @@ class CompleteDataStepContent extends StatefulWidget {
 }
 
 class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
-  late DependenciesRepoImpl dependenciesRepo;
-  late DependenciesModel? dependencies;
-  bool isLoading = true;
-  String? errorMessage;
   final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
-    dependenciesRepo = DependenciesRepoImpl(
-      apiUrl: 'https://test.kafiil.com/api/test/dependencies',
-      httpClient: http.Client(),
-    );
-    _fetchDependencies();
-  }
-
-  Future<void> _fetchDependencies() async {
-    try {
-      final result = await dependenciesRepo.fetchDependencies();
-      setState(() {
-        dependencies = result;
-        isLoading = false;
-      });
-    } catch (error) {
-      setState(() {
-        errorMessage = error.toString();
-        isLoading = false;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-
-    List<MultiSelectItem<String>> skillItems = dependencies!.tags
-        .map((tag) => MultiSelectItem<String>(tag.label, tag.label))
-        .toList();
 
     return Form(
       key: _formKey2,
@@ -75,88 +43,37 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
           const AddAvatar(),
           const SizedBox(height: 12),
           CustomTextFormField(
-            fieldName: 'About',
+            fieldName: AppStrings.about,
             minLines: 4,
             controller: aboutController,
             maxLength: 1000,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'About is required';
+                return AppStrings.aboutIsRequired;
               } else if (value.length < 10) {
-                return 'About must be at least 8 characters long';
+                return AppStrings.aboutLength;
               }
               return null;
             },
             maxLines: 4,
           ),
           const SizedBox(height: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Salary',
-                style: StylesApp.styleMedium12(context),
-              ),
-              const SizedBox(height: 5),
-              ClickableContainer(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CustomFloatingActionButton(
-                        heroTag: 'minus',
-                        onPressed: () {
-                          setState(() {
-                            if (counter > 100) {
-                              counter -= 100;
-                            }
-                          });
-                        },
-                        child: const Icon(
-                          FontAwesomeIcons.minus,
-                          color: kPrimary900Color,
-                          size: 20,
-                        )),
-                    Text(
-                      'SAR $counter',
-                      style: StylesApp.styleMedium16(context).copyWith(
-                        color: kGrey800Color,
-                      ),
-                    ),
-                    CustomFloatingActionButton(
-                        heroTag: 'plus',
-                        onPressed: () {
-                          setState(() {
-                            if (counter < 1000) {
-                              counter += 100;
-                            }
-                          });
-                        },
-                        child: const Icon(
-                          FontAwesomeIcons.plus,
-                          color: kPrimary900Color,
-                          size: 20,
-                        )),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          const SalarySection(),
           const SizedBox(height: 12),
           CustomTextFormField(
-            fieldName: 'Birth Date',
+            fieldName: AppStrings.birthDate,
             controller: birthdateController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'BirthDate is required';
+                return AppStrings.birthdateIsRequired;
               }
               final selectedDate = DateTime.parse(value);
               final today = DateTime.now();
               if (selectedDate.year == today.year &&
                   selectedDate.month == today.month &&
                   selectedDate.day == today.day) {
-                return 'Birth date cannot be today';
+                return AppStrings.birthdateCanNotBeToday;
               }
-
               return null;
             },
             onTap: () async {
@@ -174,286 +91,19 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
             },
             suffixIcon: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: SvgPicture.asset(ImagesApp.calendarIcon),
+              child: SvgPicture.asset(AppAssets.calendarIcon),
             ),
             readOnly: true,
           ),
-
           const SizedBox(height: 12.0),
-          Column(
-            children: [
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Gender',
-                  style: StylesApp.styleMedium12(context),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        gender = false;
-                      });
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Radio(
-                            value: false,
-                            groupValue: gender,
-                            onChanged: (value) {
-                              setState(() {
-                                gender = value!;
-                              });
-                            }),
-                        Text(
-                          'Male',
-                          style: StylesApp.styleMedium16(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        gender = true;
-                      });
-                    },
-                    child: Row(
-                      children: [
-                        Radio(
-                            value: true,
-                            groupValue: gender,
-                            onChanged: (value) {
-                              setState(() {
-                                gender = value!;
-                              });
-                            }),
-                        Text(
-                          'Female',
-                          style: StylesApp.styleMedium16(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          const GenderSection(),
           const SizedBox(height: 12.0),
-          Column(
-            children: [
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Skills',
-                  style: StylesApp.styleMedium12(context),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              ClickableContainer(
-                child: Column(
-                  children: [
-                    MultiSelectDialogField(
-                      buttonIcon: const Icon(
-                        Icons.account_circle_sharp,
-                        color: kGrey50Color,
-                      ),
-                      backgroundColor: kPrimary100Color,
-                      selectedColor: kPrimary900Color,
-                      title: const Text("Skills"),
-                      buttonText: Text(
-                        "Select",
-                        style: StylesApp.styleMedium16(context).copyWith(
-                          color: kGrey50Color,
-                        ),
-                      ),
-                      items: skillItems,
-                      onConfirm: (values) {
-                        setState(() {
-                          selectedSkills = values.cast<String>();
-                          // print(selectedSkills);
-                          // print('1000000000000000000000000000');
-
-                        });
-                      },
-                      chipDisplay: MultiSelectChipDisplay(
-                        chipColor: kPrimary100Color,
-                        textStyle: StylesApp.styleMedium12(context)
-                            .copyWith(color: kPrimary900Color),
-                        onTap: (value) {
-                          setState(() {
-                            selectedSkills.remove(value);
-                          });
-                        },
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Skills is required';
-                        }
-                        return null;
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      itemsTextStyle: StylesApp.styleMedium12(context)
-                          .copyWith(color: kPrimary900Color),
-                      selectedItemsTextStyle: StylesApp.styleMedium12(context)
-                          .copyWith(color: kPrimary900Color),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.transparent),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          const SkillsSection2(),
           const SizedBox(height: 12.0),
-          Column(
-            children: [
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Favourite Social Media',
-                  style: StylesApp.styleMedium12(context),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isFacebookSelected = !isFacebookSelected;
-                    if (isFacebookSelected == true) {
-                      isInstagramSelected=false;
-                      isXSelected=false;
-                      favouriteSocialMedia[0]='facebook';
-                    }
-                  });
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Checkbox(
-                        activeColor: kPrimary900Color,
-                        value: isFacebookSelected,
-                        onChanged: (value) {
-                          setState(() {
-                            isFacebookSelected = value!;
-                            if (isFacebookSelected == true) {
-                              isInstagramSelected=false;
-                              isXSelected=false;
-                              favouriteSocialMedia[0]='facebook';
-                            }
-                          });
-                        },
-                      ),
-                      const Icon(
-                        FontAwesomeIcons.facebook,
-                        color: Colors.blueAccent,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        'Facebook',
-                        style: StylesApp.styleMedium14(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isXSelected=!isXSelected;
-                    if (isXSelected == true) {
-                      isInstagramSelected=false;
-                      isFacebookSelected=false;
-                      favouriteSocialMedia[0]='x';
-                    }
-                  });
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Checkbox(
-                        activeColor: kPrimary900Color,
-                        value: isXSelected,
-                        onChanged: (value) {
-                          setState(() {
-                            isXSelected = value!;
-                            if (isXSelected == true) {
-                              isInstagramSelected=false;
-                              isFacebookSelected=false;
-                              favouriteSocialMedia[0]='x';
-                            }
-                          });
-                        },
-                      ),
-                      const Icon(FontAwesomeIcons.x),
-                      const SizedBox(width: 5),
-                      Text(
-                        'X',
-                        style: StylesApp.styleMedium14(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  setState(() {
-                    isInstagramSelected=!isInstagramSelected;
-                    if (isInstagramSelected == true) {
-                      isXSelected=false;
-                      isFacebookSelected=false;
-                      favouriteSocialMedia[0]='instagram';
-                    }
-
-                  });
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Checkbox(
-                        activeColor: kPrimary900Color,
-                        value: isInstagramSelected,
-                        onChanged: (value) {
-                          setState(() {
-                            isInstagramSelected = value!;
-                            if (isInstagramSelected == true) {
-                              isXSelected=false;
-                              isFacebookSelected=false;
-                              favouriteSocialMedia[0]='instagram';
-                            }
-                          });
-                        },
-                      ),
-                      const Icon(
-                        FontAwesomeIcons.instagram,
-                        color: Colors.redAccent,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        'Instagram',
-                        style: StylesApp.styleMedium14(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+          const FavouriteSocialMediaSection(),
           const SizedBox(height: 30),
           BlocProvider(
-            create: (context) => RegisterCubit(),
+            create: (context) => RegisterCubit(RegisterRepoImpl()),
             child: BlocConsumer<RegisterCubit, RegisterState>(
               builder: (context, state) {
                 if (state is RegisterLoadingState){
@@ -463,7 +113,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       width: double.infinity,
                       child: const CustomTextButton(
                         child: CircularProgressIndicator(
-                          color: kBackgroundColor,
+                          color: AppColors.kBackgroundColor,
                         )
                       ),
                     ),
@@ -475,7 +125,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       height: MediaQuery.sizeOf(context).height * 0.09,
                       width: double.infinity,
                       child: const CustomTextButton(
-                        text: 'Submit',
+                        text: AppStrings.submitButton,
                       ),
                     ),
                   );
@@ -486,16 +136,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       height: MediaQuery.sizeOf(context).height * 0.09,
                       width: double.infinity,
                       child: CustomTextButton(
-                        text: 'Submit',
+                        text: AppStrings.submitButton,
                         onPressed: () {
                           if (_formKey2.currentState!.validate()) {
-                           if (dependencies != null) {
-                             for (int i = 0; i < dependencies!.tags.length; i++) {
-                               if (selectedSkills.contains(dependencies!.tags[i].label)) {
-                                 tags.add(dependencies!.tags[i].value);
-                               }
-                             }
-                           }
                            RegisterModel registerModel;
                             registerModel = RegisterModel(
                               firstName: firstNameController.text,
@@ -513,23 +156,23 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                               avatar: avatar,
                             );
 
-                            // print(registerModel.firstName);
-                            // print(registerModel.lastName);
-                            // print(registerModel.email);
-                            // print(registerModel.password);
-                            // print(registerModel.passwordConfirmation);
-                            // print(registerModel.type);
-                            // print(registerModel.about);
-                            // print(registerModel.salary);
-                            // print(registerModel.birthDate);
-                            // print(registerModel.favoriteSocialMedia);
-                            // print(registerModel.tags);
-                            // print(registerModel.gender);
+                            print(registerModel.firstName);
+                            print(registerModel.lastName);
+                            print(registerModel.email);
+                            print(registerModel.password);
+                            print(registerModel.passwordConfirmation);
+                            print(registerModel.type);
+                            print(registerModel.about);
+                            print(registerModel.salary);
+                            print(registerModel.birthDate);
+                            print(registerModel.favoriteSocialMedia);
+                            print(registerModel.tags);
+                            print(registerModel.gender);
                             BlocProvider.of<RegisterCubit>(context)
                                 .registerUser(registerModel);
 
                           } else {
-                            customSnackBar(context, 'Fill the required fields');
+                            customSnackBar(context, AppStrings.fillRequiredFields);
                           }
                         },
                       ),
@@ -538,19 +181,15 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                 }
               },
               listener: (context, state) {
-                if (state is RegisterLoadingState) {
-                  isLoading = true;
-                } else if (state is RegisterSuccessState) {
-                  isLoading = false;
-                  customSnackBar(context, 'Success! Registration Complete.',
-                    icon: Icons.check_circle,
-                    iconColor: kPrimary900Color,
-                    textStyle: StylesApp.styleSemiBold14(context).copyWith(color: Colors.greenAccent)
-                  );
+                if (state is RegisterLoadingState) {}
+                else if (state is RegisterSuccessState) {
+                  customSnackBar(context, AppStrings.registrationComplete, icon: Icons.check_circle, iconColor: AppColors.kPrimary900Color, textStyle: AppStyles.styleSemiBold14(context).copyWith(color: Colors.greenAccent));
                   GoRouter.of(context).pop();
                 } else if (state is RegisterFailureState) {
-                  isLoading = false;
                   customSnackBar(context,state.errorMessage.toString(),iconColor: Colors.red, icon: FontAwesomeIcons.exclamation, customDuration:3);
+                }
+                else{
+
                 }
               },
             ),

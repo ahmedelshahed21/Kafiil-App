@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/home/data/models/country_model.dart';
+import 'package:kafiil_app/core/constants/constants.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class CountryDataSource extends DataGridSource {
@@ -33,7 +34,7 @@ class CountryDataSource extends DataGridSource {
             style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
-                fontFamily: 'Montserrat',
+                fontFamily: montserratFont,
                 color: Colors.black),
           ),
         );

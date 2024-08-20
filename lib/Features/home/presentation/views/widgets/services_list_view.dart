@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kafiil_app/Features/home/presentation/manager/products_cubit/products_cubit.dart';
-import 'package:kafiil_app/Features/home/presentation/manager/products_cubit/products_state.dart';
-import 'package:kafiil_app/Features/home/presentation/views/widgets/custom_loading_effect.dart';
+import 'package:kafiil_app/Features/home/presentation/manager/services_cubit/services_cubit.dart';
+import 'package:kafiil_app/Features/home/presentation/manager/services_cubit/services_state.dart';
+import 'package:kafiil_app/Features/home/presentation/views/widgets/services_view_loading_effect.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/service_item.dart';
 
 class ServicesListView extends StatelessWidget {
@@ -13,16 +13,16 @@ class ServicesListView extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height*0.24;
 
 
-    return BlocBuilder<ProductsCubit, ProductsState>(
+    return BlocBuilder<ServicesCubit, ServicesState>(
       builder: (context, state) {
-        if (state is ProductsLoadingState) {
+        if (state is ServicesLoadingState) {
           return SizedBox(
             height: screenHeight,
             child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context,index){
-                  return const CustomLoadingEffect();
+                  return const ServicesViewLoadingEffect();
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return const SizedBox(width: 7.0);
@@ -30,25 +30,25 @@ class ServicesListView extends StatelessWidget {
                 itemCount: 10
             ),
           );
-        } else if (state is ProductsSuccessState) {
+        } else if (state is ServicesSuccessState) {
           return SizedBox(
             height: screenHeight,
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
-              itemCount: state.products.length,
+              itemCount: state.services.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return ServiceItem(service: state.products[index]);
+                return ServiceItem(service: state.services[index]);
               },
               separatorBuilder: (BuildContext context, int index) {
                 return const SizedBox(width: 7.0);
               },
             ),
           );
-        } else if (state is ProductsFailureState) {
+        } else if (state is ServicesFailureState) {
           return Center(child: Text(state.message));
         } else {
-          return const Center(child: Text('Press the button to fetch products'));
+          return const Center(child: Text('There is an Error'));
         }
       },
     );

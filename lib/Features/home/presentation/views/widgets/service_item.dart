@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/Features/home/data/models/product_model.dart';
+import 'package:kafiil_app/Features/home/data/models/services_model.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/service_image.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/title_service_item.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/features/home/presentation/views/widgets/rating_section.dart';
 
 class ServiceItem extends StatelessWidget {
-  final ProductModel service;
+  final ServicesModel service;
 
   const ServiceItem({super.key, required this.service});
 
@@ -21,7 +21,7 @@ class ServiceItem extends StatelessWidget {
         aspectRatio: 153 / 192,
         child: Container(
           decoration: BoxDecoration(
-            color: kBackgroundColor,
+            color: AppColors.kBackgroundColor,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(

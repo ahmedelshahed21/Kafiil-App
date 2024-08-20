@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 
 class TitleServiceItem extends StatelessWidget {
   const TitleServiceItem({
@@ -16,8 +16,8 @@ class TitleServiceItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 6.0),
       child: Text(title,
         maxLines: 2,
-        style: StylesApp.styleMedium12(context).copyWith(
-          color: kGrey900Color,
+        style: AppStyles.styleMedium12(context).copyWith(
+          color: AppColors.kGrey900Color,
           fontSize: 10,
         ),
       ),

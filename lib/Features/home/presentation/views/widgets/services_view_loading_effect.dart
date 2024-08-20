@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/service_image_loading_effect.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CustomLoadingEffect extends StatelessWidget {
-  const CustomLoadingEffect({
+class ServicesViewLoadingEffect extends StatelessWidget {
+  const ServicesViewLoadingEffect({
     super.key,
   });
 
@@ -19,7 +19,7 @@ class CustomLoadingEffect extends StatelessWidget {
         aspectRatio: 153 / 192,
         child: Container(
             decoration: BoxDecoration(
-              color: kBackgroundColor,
+              color: AppColors.kBackgroundColor,
               borderRadius: BorderRadius.circular(8),
             ),
           child: Column(
@@ -29,7 +29,7 @@ class CustomLoadingEffect extends StatelessWidget {
               const ServiceImageLoadingEffect(),
               Shimmer.fromColors(
                 baseColor: Colors.grey.shade300,
-                highlightColor:kBackgroundColor,
+                highlightColor:AppColors.kBackgroundColor,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(

@@ -1,4 +1,4 @@
-class ProductModel {
+class ServicesModel {
   final int id;
   final String mainImage;
   final double price;
@@ -6,7 +6,7 @@ class ProductModel {
   final double averageRating;
   final double completedSalesCount;
 
-  ProductModel({
+  ServicesModel({
     required this.id,
     required this.mainImage,
     required this.price,
@@ -15,8 +15,8 @@ class ProductModel {
     required this.completedSalesCount
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
+  factory ServicesModel.fromJson(Map<String, dynamic> json) {
+    return ServicesModel(
       id: json['id'],
       mainImage: json['main_image'],
       price: json['price'].toDouble(),

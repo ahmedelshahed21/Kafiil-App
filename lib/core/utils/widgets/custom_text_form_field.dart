@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/functions/outline_input_border.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/core/utils/helpers/functions/outline_input_border.dart';
+
 
 class CustomTextFormField extends StatelessWidget {
   final String? fieldName;
@@ -63,15 +64,15 @@ class CustomTextFormField extends StatelessWidget {
       children: [
         Text(
           fieldName ?? '',
-          style: StylesApp.styleMedium12(context),
+          style: AppStyles.styleMedium12(context),
         ),
         const SizedBox(height: 5.0),
         TextFormField(
           onChanged: onChanged,
           onTap: onTap,
           readOnly: readOnly ?? false,
-          style: StylesApp.styleMedium16(context).copyWith(
-            color: kGrey800Color,
+          style: AppStyles.styleMedium16(context).copyWith(
+            color: AppColors.kGrey800Color,
           ),
           keyboardType: textInputType,
           obscureText: obscureText ?? false,
@@ -83,7 +84,7 @@ class CustomTextFormField extends StatelessWidget {
                 }
                 return null;
               },
-          cursorColor: kPrimary900Color,
+          cursorColor: AppColors.kPrimary900Color,
           cursorRadius: const Radius.circular(16),
           cursorHeight: 28,
           cursorWidth: 2,
@@ -95,14 +96,14 @@ class CustomTextFormField extends StatelessWidget {
             counterText: '',
             contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: 18.0, horizontal: 12.0),
             filled: true,
-            fillColor: kGrey50Color,
+            fillColor: AppColors.kGrey50Color,
             prefix: prefix,
             suffix: suffix,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            suffixIconColor: kGrey500Color,
+            suffixIconColor: AppColors.kGrey500Color,
             hintText: hintText,
-            hintStyle: StylesApp.styleMedium16(context).copyWith(color: kGrey800Color),
+            hintStyle: AppStyles.styleMedium16(context).copyWith(color: AppColors.kGrey800Color,),
             enabledBorder: buildOutlineInputBorder(),
             focusedBorder: buildOutlineInputBorder(),
             errorBorder: buildOutlineInputBorder(color: Colors.red),

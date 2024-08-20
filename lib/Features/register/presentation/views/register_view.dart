@@ -1,12 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/shared_components/back_icon_button.dart';
-import 'package:kafiil_app/core/shared_components/custom_text_button.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/utils/widgets/back_icon_button.dart';
+import 'package:kafiil_app/core/utils/widgets/custom_text_button.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/complete_data_step_content.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/register_step_content.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/error_container.dart';
 
 TextEditingController firstNameController=TextEditingController();
@@ -27,8 +27,6 @@ bool isXSelected = false;
 bool isInstagramSelected = false;
 File? avatar;
 
-
-
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
@@ -38,24 +36,20 @@ class RegisterView extends StatefulWidget {
 
 class RegisterViewState extends State<RegisterView> {
 
-
   int _currentStep = 0;
   final _formKey = GlobalKey<FormState>();
-
   String _errorMessage = '';
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
         titleSpacing: -16,
         title: Text(
-          'Register',
-          style: StylesApp.styleSemiBold18(context),
+          AppStrings.register,
+          style: AppStyles.styleSemiBold18(context),
         ),
         leading: BackIconButton(
           onPressed: () {
@@ -77,7 +71,7 @@ class RegisterViewState extends State<RegisterView> {
             child: Theme(
               data: ThemeData(
                 colorScheme: const ColorScheme.light(
-                  primary: kPrimary900Color,
+                  primary: AppColors.kPrimary900Color
                 ),
               ),
               child: Stepper(
@@ -94,7 +88,7 @@ class RegisterViewState extends State<RegisterView> {
                       });
                     } else {
                       setState(() {
-                        _errorMessage = 'Fill the required fields';
+                        _errorMessage = AppStrings.fillRequiredFields;
                       });
                     }
                   } else {
@@ -103,7 +97,7 @@ class RegisterViewState extends State<RegisterView> {
                       _errorMessage = '';
                     } else {
                       setState(() {
-                        _errorMessage = 'Fill the required fields';
+                        _errorMessage = AppStrings.fillRequiredFields;
                       });
                     }
                   }
@@ -132,8 +126,8 @@ class RegisterViewState extends State<RegisterView> {
 
   Step buildRegisterStep() {
     return Step(
-      title: Text('Register',
-        style: StylesApp.styleSemiBold12(context),
+      title: Text(AppStrings.register,
+        style: AppStyles.styleSemiBold12(context),
       ),
       content: RegisterStepContent(
           formKey: _formKey
@@ -145,8 +139,8 @@ class RegisterViewState extends State<RegisterView> {
 
   Step buildCompleteDataStep() {
     return Step(
-      title: Text('Complete Data',
-        style: StylesApp.styleSemiBold12(context),
+      title: Text(AppStrings.completeData,
+        style: AppStyles.styleSemiBold12(context),
       ),
       content: const CompleteDataStepContent(),
       isActive: _currentStep >= 1,
@@ -164,7 +158,7 @@ class RegisterViewState extends State<RegisterView> {
               child: SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.09,
                 child: CustomTextButton(
-                  text: 'Next',
+                  text: AppStrings.nextButton,
                   onPressed: details.onStepContinue,
                 ),
               ),

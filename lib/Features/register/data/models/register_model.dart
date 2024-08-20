@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 
 class RegisterModel {
@@ -12,9 +11,9 @@ class RegisterModel {
   final String password;
   final String email;
   final String birthDate;
-  final bool? gender; // optional
+  final bool? gender;
   final int type;
-  final File? avatar; // optional
+  final File? avatar;
   final String passwordConfirmation;
 
   RegisterModel({
@@ -34,7 +33,7 @@ class RegisterModel {
   });
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
 
     data['first_name'] = this.firstName;
     data['last_name'] = this.lastName;

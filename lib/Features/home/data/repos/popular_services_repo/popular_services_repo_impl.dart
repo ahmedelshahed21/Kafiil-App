@@ -1,25 +1,25 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:kafiil_app/Features/home/data/models/product_model.dart';
-import 'package:kafiil_app/Features/home/data/repos/popular_products_repo/popular_products_repo.dart';
+import 'package:kafiil_app/Features/home/data/models/services_model.dart';
+import 'package:kafiil_app/Features/home/data/repos/popular_services_repo/popular_services_repo.dart';
 import 'package:kafiil_app/core/errors/failure.dart';
 import 'package:kafiil_app/core/utils/api_service.dart';
 
-class PopularProductsRepoImpl extends PopularProductsRepo {
+class PopularServicesRepoImpl extends PopularServicesRepo {
   final ApiService apiService;
-  PopularProductsRepoImpl(this.apiService);
+  PopularServicesRepoImpl(this.apiService);
 
   @override
-  Future<Either<Failure, List<ProductModel>>> fetchPopularProducts() async {
+  Future<Either<Failure, List<ServicesModel>>> fetchPopularServices() async {
     try {
       var response = await apiService.get(endPoint:'service/popular');
       print('API Response: $response'); // Log the API response
 
       // Check if response contains 'data' key
       if (response['data'] != null) {
-        List<ProductModel> products = [];
+        List<ServicesModel> products = [];
         for (var item in response['data']) {
-          products.add(ProductModel.fromJson(item));
+          products.add(ServicesModel.fromJson(item));
         }
         return right(products);
       } else {

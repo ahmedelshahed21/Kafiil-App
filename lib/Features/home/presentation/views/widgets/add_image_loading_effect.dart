@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+
 
 class AddNewImageLoadingEffect extends StatelessWidget{
   const AddNewImageLoadingEffect({super.key});
@@ -10,7 +11,7 @@ class AddNewImageLoadingEffect extends StatelessWidget{
     return Stack(
       children: [
         const CircleAvatar(
-          backgroundColor: kGrey50Color,
+          backgroundColor: AppColors.kGrey50Color,
           radius: 41.5,
         ),
         Positioned(
@@ -21,7 +22,7 @@ class AddNewImageLoadingEffect extends StatelessWidget{
               //buildImageBottomSheet(context);
             },
             child: const CircleAvatar(
-              backgroundColor: kPrimary900Color,
+              backgroundColor: AppColors.kPrimary900Color,
               radius: 12,
               child: Icon(Icons.add,
                 size: 20,

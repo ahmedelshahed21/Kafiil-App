@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/add_image_loading_effect.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:shimmer/shimmer.dart';
 
 class WhoAmILoadingEffect extends StatelessWidget {
@@ -27,18 +28,18 @@ class WhoAmILoadingEffect extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('First Name',
-                        style: StylesApp.styleMedium12(context),
+                      Text(AppStrings.firstName,
+                        style: AppStyles.styleMedium12(context),
                       ),
                       const SizedBox(height: 5.0),
                       Shimmer.fromColors(
-                        baseColor: kGrey50Color,
-                        highlightColor: Colors.white,
+                        baseColor: AppColors.kGrey50Color,
+                        highlightColor: AppColors.kBackgroundColor,
                         child: Container(
                           height: 60,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: kGrey50Color
+                              color: AppColors.kGrey50Color,
                           ),
                         ),
                       )
@@ -51,18 +52,18 @@ class WhoAmILoadingEffect extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('First Name',
-                        style: StylesApp.styleMedium12(context),
+                      Text(AppStrings.lastName,
+                        style: AppStyles.styleMedium12(context),
                       ),
                       const SizedBox(height: 5.0),
                       Shimmer.fromColors(
-                        baseColor: kGrey50Color,
-                        highlightColor: Colors.white,
+                        baseColor: AppColors.kGrey50Color,
+                        highlightColor: AppColors.kBackgroundColor,
                         child: Container(
                           height: 60,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: kGrey50Color
+                              color: AppColors.kGrey50Color,
                           ),
                         ),
                       )
@@ -76,18 +77,18 @@ class WhoAmILoadingEffect extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Email Address',
-                  style: StylesApp.styleMedium12(context),
+                Text(AppStrings.email,
+                  style: AppStyles.styleMedium12(context),
                 ),
                 const SizedBox(height: 5.0),
                 Shimmer.fromColors(
-                  baseColor: kGrey50Color,
-                  highlightColor: Colors.white,
+                  baseColor: AppColors.kGrey50Color,
+                  highlightColor: AppColors.kBackgroundColor,
                   child: Container(
                     height: 60,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: kGrey50Color
+                        color: AppColors.kGrey50Color,
                     ),
                   ),
                 )
@@ -98,18 +99,18 @@ class WhoAmILoadingEffect extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Password',
-                  style: StylesApp.styleMedium12(context),
+                Text(AppStrings.password,
+                  style: AppStyles.styleMedium12(context),
                 ),
                 const SizedBox(height: 5.0),
                 Shimmer.fromColors(
-                  baseColor: kGrey50Color,
-                  highlightColor: Colors.white,
+                  baseColor: AppColors.kGrey50Color,
+                  highlightColor: AppColors.kBackgroundColor,
                   child: Container(
                     height: 60,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: kGrey50Color
+                        color: AppColors.kGrey50Color,
                     ),
                   ),
                 )
@@ -119,14 +120,14 @@ class WhoAmILoadingEffect extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                'User Type',
-                style: StylesApp.styleMedium12(context),
+                AppStrings.userType,
+                style: AppStyles.styleMedium12(context),
               ),
             ),
             const SizedBox(height: 14),
             Shimmer.fromColors(
-              baseColor: kGrey50Color,
-              highlightColor: Colors.white,
+              baseColor: AppColors.kGrey50Color,
+              highlightColor: AppColors.kBackgroundColor,
               child: Row(
                 children: [
                   const SizedBox(width: 16),
@@ -135,20 +136,20 @@ class WhoAmILoadingEffect extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(6),
                         decoration: const ShapeDecoration(
-                            color: kGrey50Color,
+                            color: AppColors.kGrey50Color,
                             shape: OvalBorder()
                         ),
                         child: const Icon(
                           FontAwesomeIcons.plus,
                           size: 10,
-                          color: kGrey50Color,
+                          color: AppColors.kGrey50Color,
                         ),
                       ),
                       const SizedBox(width: 8),
                       Container(
                         height: 10,
                         width: 60,
-                        color: kGrey50Color,
+                        color: AppColors.kGrey50Color,
                       )
                     ],
                   ),
@@ -158,20 +159,20 @@ class WhoAmILoadingEffect extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(6),
                         decoration: const ShapeDecoration(
-                            color: kGrey50Color,
+                            color: AppColors.kGrey50Color,
                             shape: OvalBorder()
                         ),
                         child: const Icon(
                           FontAwesomeIcons.plus,
                           size: 10,
-                          color: kGrey50Color,
+                          color: AppColors.kGrey50Color,
                         ),
                       ),
                       const SizedBox(width: 8),
                       Container(
                         height: 10,
                         width: 60,
-                        color: kGrey50Color,
+                        color: AppColors.kGrey50Color,
                       )
                     ],
                   ),
@@ -181,12 +182,12 @@ class WhoAmILoadingEffect extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(6),
                         decoration: const ShapeDecoration(
-                            color: kGrey50Color,
+                            color: AppColors.kGrey50Color,
                             shape: OvalBorder()
                         ),
                         child: const Icon(
                           FontAwesomeIcons.plus,
-                          color: kGrey50Color,
+                          color: AppColors.kGrey50Color,
                           size: 10,
                         ),
                       ),
@@ -194,7 +195,7 @@ class WhoAmILoadingEffect extends StatelessWidget {
                       Container(
                         height: 10,
                         width: 60,
-                        color: kGrey50Color,
+                        color: AppColors.kGrey50Color,
                       )
                     ],
                   ),
@@ -206,18 +207,62 @@ class WhoAmILoadingEffect extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('About',
-                  style: StylesApp.styleMedium12(context),
+                Text(AppStrings.about,
+                  style: AppStyles.styleMedium12(context),
                 ),
                 const SizedBox(height: 5.0),
                 Shimmer.fromColors(
-                  baseColor: kGrey50Color,
-                  highlightColor: Colors.white,
+                  baseColor: AppColors.kGrey50Color,
+                  highlightColor: AppColors.kBackgroundColor,
                   child: Container(
                     height: 200,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: kGrey50Color
+                        color: AppColors.kGrey50Color,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 12),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(AppStrings.salary,
+                  style: AppStyles.styleMedium12(context),
+                ),
+                const SizedBox(height: 5.0),
+                Shimmer.fromColors(
+                  baseColor: AppColors.kGrey50Color,
+                  highlightColor: AppColors.kBackgroundColor,
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.kGrey50Color,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 12),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(AppStrings.birthDate,
+                  style: AppStyles.styleMedium12(context),
+                ),
+                const SizedBox(height: 5.0),
+                Shimmer.fromColors(
+                  baseColor: AppColors.kGrey50Color,
+                  highlightColor: AppColors.kBackgroundColor,
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.kGrey50Color,
                     ),
                   ),
                 )

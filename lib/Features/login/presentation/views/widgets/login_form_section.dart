@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafiil_app/Features/login/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:kafiil_app/core/functions/custom_snack_bar.dart';
-import 'package:kafiil_app/core/shared_components/custom_text_button.dart';
-import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/core/utils/helpers/functions/custom_snack_bar.dart';
+import 'package:kafiil_app/core/utils/widgets/custom_text_button.dart';
+import 'package:kafiil_app/core/utils/widgets/custom_text_form_field.dart';
 
 class LoginFormSection extends StatefulWidget {
   const LoginFormSection({super.key});
@@ -27,17 +28,17 @@ class _LoginFormSectionState extends State<LoginFormSection> {
       child: Column(
         children: [
           CustomTextFormField(
-            fieldName: 'Email Address',
+            fieldName: AppStrings.email,
             controller: emailController,
             maxLength: 64,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Email Address is required';
+                return AppStrings.emailIsRequired;
               }
               String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
               RegExp regex = RegExp(pattern);
               if (!regex.hasMatch(value)) {
-                return 'Invalid Email Address';
+                return AppStrings.emailIsInvalid;
               }
               return null;
             },
@@ -48,10 +49,10 @@ class _LoginFormSectionState extends State<LoginFormSection> {
             controller: passwordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Password is required';
+                return AppStrings.passwordIsRequired;
               }
               else if(value.length<8) {
-                return 'Password must be at least 8 characters long';
+                return AppStrings.passwordLength;
               }
               return null;
             },
@@ -65,7 +66,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 });
               },
             ),
-            fieldName: 'Password',
+            fieldName: AppStrings.password,
 
           ),
           Row(
@@ -75,7 +76,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Checkbox(
-                      activeColor: kPrimary900Color,
+                      activeColor: AppColors.kPrimary900Color,
                       value: isSelected,
                       onChanged: (value){
                         setState(() {
@@ -90,14 +91,14 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                       });
 
                     },
-                    child: Text('Remember me',
-                      style: StylesApp.styleMedium12(context),
+                    child: Text(AppStrings.rememberMe,
+                      style: AppStyles.styleMedium12(context),
                     ),
                   ),
                 ],
               ),
-              Text('Forgot Password?',
-                style: StylesApp.styleMedium12(context),
+              Text(AppStrings.forgotPassword,
+                style: AppStyles.styleMedium12(context),
               ),
             ],
           ),
@@ -106,13 +107,13 @@ class _LoginFormSectionState extends State<LoginFormSection> {
             height: MediaQuery.of(context).size.height * 0.09,
             width: double.infinity,
             child: CustomTextButton(
-              text: 'Login',
+              text: AppStrings.loginButton,
               onPressed: () {
                 if(formKey.currentState!.validate()){
                   BlocProvider.of<LoginCubit>(context).loginUser(emailController.text, passwordController.text);
                 }
                 else{
-                  customSnackBar(context, 'Fill the required fields');
+                  customSnackBar(context, AppStrings.fillRequiredFields);
                 }
               },
             ),

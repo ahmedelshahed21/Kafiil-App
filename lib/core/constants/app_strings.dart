@@ -1,0 +1,57 @@
+class AppStrings {
+  static const String appName = "Kafiil App";
+  static const String accountLogin= "Account Login";
+  static const String email = "Email Address";
+  static const String password = "Password";
+  static const String rememberMe = "Remember me";
+  static const String forgotPassword = "Forgot Password?";
+  static const String loginButton = "Login";
+  static const String loginFailure = "Email Address or Password is Wrong";
+  static const String emailIsRequired='Email Address is required';
+  static const String emailIsInvalid='Invalid Email Address';
+  static const String passwordIsRequired='Password is required';
+  static const String passwordLength='Password must be at least 8 characters long';
+  static const String doNotHaveAnAccount ='Don’t have an account ?';
+  static const String register = "Register";
+  static const String firstName = "First Name";
+  static const String lastName = "Last Name";
+  static const String confirmPassword = "Confirm Password";
+  static const String userType = "User Type";
+  static const String nextButton = "Next";
+  static const String confirmPasswordIsRequired='Confirm Password is required';
+  static const String matchPasswordWithConfirmPassword='Password must be at least 8 characters long';
+  static const String userTypeIsRequired='User Type is required';
+  static const String camera = "Camera";
+  static const String gallery = "Gallery";
+  static const String completeData = "Complete Data";
+  static const String about = "About";
+  static const String salary= "Salary";
+  static const String sar= "Sar";
+  static const String birthDate= "Birth Date";
+  static const String gender= "Gender";
+  static const String male= "Male";
+  static const String female= "Female";
+  static const String skills= "Skills";
+  static const String favouriteSocialMedia= "Favourite Social Media";
+  static const String facebook= "Facebook";
+  static const String x= "X";
+  static const String instagram= "Instagram";
+  static const String submitButton= "Submit";
+  static const String aboutIsRequired='About is required';
+  static const String aboutLength='About must be at least 8 characters long';
+  static const String birthdateIsRequired='Birthdate is required';
+  static const String birthdateCanNotBeToday='Birth date cannot be today';
+  static const String skillsIsRequired='Skills is required';
+  static const String whoAmI = "Who Am I";
+  static const String countries = "Countries";
+  static const String dataLoading = 'Data Loading';
+  static const String wait = "Please, Wait";
+  static const String country = "Country";
+  static const String capital = "Capital";
+  static const String services = "Services";
+  static const String popularServices = "Popular Services";
+
+
+  static const String fillRequiredFields = "Fill the required fields";
+  static const String registrationComplete = "Success! Registration Complete.";
+}

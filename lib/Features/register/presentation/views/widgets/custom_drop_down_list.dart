@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
-import 'package:kafiil_app/core/functions/outline_input_border.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/core/utils/helpers/functions/outline_input_border.dart';
+
 
 class CustomDropDownList extends StatefulWidget {
   const CustomDropDownList({super.key});
@@ -23,14 +25,14 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          'User Type',
-          style: StylesApp.styleMedium12(context),
+          AppStrings.userType,
+          style: AppStyles.styleMedium12(context),
         ),
         const SizedBox(height: 10),
         DropdownButtonFormField<String>(
           decoration: InputDecoration(
             filled: true,
-            fillColor: kGrey50Color,
+            fillColor: AppColors.kGrey50Color,
             enabledBorder: buildOutlineInputBorder(),
             focusedBorder: buildOutlineInputBorder(),
             errorBorder: buildOutlineInputBorder(color: Colors.red),
@@ -40,14 +42,14 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
           icon: Transform.rotate(
               angle: -1.59,
               child: const Icon(Icons.arrow_back_ios_new,
-                color: kGrey300Color,
+                color: AppColors.kGrey300Color,
               )), // Change the icon and color here
           items: userTypes.map((String type) {
             return DropdownMenuItem<String>(
               value: type,
               child: Text(type,
-                style: StylesApp.styleMedium16(context).copyWith(
-                  color: kGrey800Color,
+                style: AppStyles.styleMedium16(context).copyWith(
+                  color: AppColors.kGrey800Color,
                 ),
               ),
             );
@@ -55,7 +57,7 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
           onChanged: (newValue) {
             setState(() {
               userType = newValue;
-              // Map the selected value to the corresponding integer
+
               if (userType == 'buyer') {
                 userTypeValue = 1;
               } if (userType == 'seller') {
@@ -68,7 +70,7 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please select a user type';
+              return AppStrings.userTypeIsRequired;
             }
             return null;
           },
@@ -89,5 +91,3 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
     );
   }
 }
-
-//{{baseUrl}}/api/test/user/register?first_name=ahmed&last_name=elshahed&about=searching for experts&tags[0]=5&favorite_social_media[0]=instagram&salary=100&birth_date=1970-01-25&type=1&email=samer@gmail.com&password=123123123&password_confirmation=123123123&avatar=https://kafiil.s3.eu-central-1.amazonaws.com/media/avatar/b518d74abedbc2c85e57a31ae1d7b92d/DkDzD7oaOrVbfx1rSyHY5Xdts5Y42sO3.png

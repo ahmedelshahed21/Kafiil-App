@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 
 
 void customSnackBar(BuildContext context, String message, {IconData? icon, Color? iconColor, TextStyle? textStyle,int? customDuration}) {
@@ -25,7 +24,7 @@ void customSnackBar(BuildContext context, String message, {IconData? icon, Color
             Flexible(
               child: FittedBox(
                 child: Text(message,
-                    style: textStyle ?? StylesApp.styleSemiBold14(context).copyWith(color: Colors.yellowAccent)
+                    style: textStyle ?? AppStyles.styleSemiBold14(context).copyWith(color: Colors.yellowAccent)
                 ),
               ),
             ),

@@ -1,23 +1,23 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:kafiil_app/Features/home/data/models/product_model.dart';
-import 'package:kafiil_app/Features/home/data/repos/products_repo/products_repo.dart';
+import 'package:kafiil_app/Features/home/data/models/services_model.dart';
+import 'package:kafiil_app/Features/home/data/repos/services_repo/services_repo.dart';
 import 'package:kafiil_app/core/errors/failure.dart';
 import 'package:kafiil_app/core/utils/api_service.dart';
 
-class ProductsRepoImpl extends ProductsRepo {
+class ServicesRepoImpl extends ServicesRepo {
   final ApiService apiService;
-  ProductsRepoImpl(this.apiService);
+  ServicesRepoImpl(this.apiService);
 
   @override
-  Future<Either<Failure, List<ProductModel>>> fetchProducts() async {
+  Future<Either<Failure, List<ServicesModel>>> fetchServices() async {
     try {
       var response = await apiService.get(endPoint:'service');
       print('API Response: $response');
       if (response['data'] != null) {
-        List<ProductModel> products = [];
+        List<ServicesModel> products = [];
         for (var item in response['data']) {
-          products.add(ProductModel.fromJson(item));
+          products.add(ServicesModel.fromJson(item));
         }
         return right(products);
       } else {

@@ -1,4 +1,4 @@
-abstract class ImagesApp{
+abstract class AppAssets{
   static const completeDataImage='assets/images/completeData.png';
   static const loginImage='assets/images/Login-cuate.svg';
   static const whoAmIIcon='assets/images/whoAmI.svg';

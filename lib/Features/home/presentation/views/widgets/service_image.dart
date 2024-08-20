@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:kafiil_app/Features/home/presentation/views/widgets/service_image_loading_effect.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 
 class ServiceImage extends StatelessWidget {
   final String? image;
@@ -34,12 +34,12 @@ class ServiceImage extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6.0),
             decoration: BoxDecoration(
-              color: kPrimary900Color,
+              color: AppColors.kPrimary900Color,
               borderRadius: BorderRadius.circular(27),
             ),
             child: Text(
               '\$${price.round()}',
-              style: StylesApp.styleMedium12(context).copyWith(color: Colors.white),
+              style: AppStyles.styleMedium12(context).copyWith(color: Colors.white),
             ),
           ),
         ),

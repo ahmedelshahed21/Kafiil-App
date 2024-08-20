@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+
 
 class ClickableContainer extends StatelessWidget{
   const ClickableContainer({super.key, this.onTap, this.child});
@@ -13,7 +14,7 @@ class ClickableContainer extends StatelessWidget{
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         decoration: BoxDecoration(
-          color: kGrey50Color,
+          color: AppColors.kGrey50Color,
           borderRadius: BorderRadius.circular(16)
         ),
         child: child,

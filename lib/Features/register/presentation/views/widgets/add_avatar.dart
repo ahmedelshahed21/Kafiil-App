@@ -1,12 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/Features/register/presentation/views/widgets/image_source_card.dart';
-import 'package:kafiil_app/core/functions/the_image_source_enum.dart';
-import 'package:kafiil_app/core/utils/assets_app.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/constants/app_assets.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/utils/helpers/functions/the_image_source_enum.dart';
+
 
 class AddAvatar extends StatefulWidget {
   const AddAvatar({super.key});
@@ -16,10 +17,7 @@ class AddAvatar extends StatefulWidget {
 }
 
 class _AddAvatarState extends State<AddAvatar> {
-
-
   final imagePicker = ImagePicker();
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -31,8 +29,8 @@ class _AddAvatarState extends State<AddAvatar> {
           child: CircleAvatar(
             backgroundImage: avatar != null
                 ? FileImage(avatar!) as ImageProvider
-                : const AssetImage(ImagesApp.completeDataImage),
-            backgroundColor: kPrimary100Color,
+                : const AssetImage(AppAssets.completeDataImage),
+            backgroundColor: AppColors.kPrimary100Color,
             radius: 41.5,
           ),
         ),
@@ -44,7 +42,7 @@ class _AddAvatarState extends State<AddAvatar> {
               buildImageBottomSheet(context);
             },
             child: const CircleAvatar(
-              backgroundColor: kPrimary900Color,
+              backgroundColor: AppColors.kPrimary900Color,
               radius: 12,
               child: Icon(
                 Icons.add,
@@ -71,7 +69,7 @@ class _AddAvatarState extends State<AddAvatar> {
               onPressed: () {
                 pickImage(imageSource: TheImageSource.camera);
               },
-              name: 'Camera',
+              name: AppStrings.camera,
             ),
             ImageSourceCard(
               icon: Icons.image_rounded,
@@ -79,7 +77,7 @@ class _AddAvatarState extends State<AddAvatar> {
               onPressed: () {
                 pickImage(imageSource: TheImageSource.gallery);
               },
-              name: 'Gallery',
+              name: AppStrings.gallery,
             ),
           ],
         );

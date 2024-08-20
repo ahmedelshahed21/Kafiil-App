@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 
 
 class ImageSourceCard extends StatelessWidget {
@@ -23,7 +23,7 @@ class ImageSourceCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          color: kPrimary100Color, borderRadius: BorderRadius.circular(16)),
+          color: AppColors.kPrimary100Color, borderRadius: BorderRadius.circular(16)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -34,7 +34,7 @@ class ImageSourceCard extends StatelessWidget {
             onPressed: onPressed,
           ),
           Text(name,
-              style: StylesApp.styleSemiBold14(context)
+              style: AppStyles.styleSemiBold14(context)
                   .copyWith(color: Colors.black, letterSpacing: 3,fontWeight: FontWeight.w800
               )
           ),

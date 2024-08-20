@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/utils/widgets/custom_text_form_field.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/custom_drop_down_list.dart';
-import 'package:kafiil_app/core/shared_components/custom_text_form_field.dart';
+
 
 class RegisterStepContent extends StatefulWidget {
 
@@ -12,7 +14,6 @@ class RegisterStepContent extends StatefulWidget {
   @override
   State<RegisterStepContent> createState() => _RegisterStepContentState();
 }
-
 class _RegisterStepContentState extends State<RegisterStepContent> {
   bool isPasswordSecure = true;
   bool isConfirmationPasswordSecure = true;
@@ -28,7 +29,7 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
             children: [
               Expanded(
                 child: CustomTextFormField(
-                  fieldName: 'First Name',
+                  fieldName: AppStrings.firstName,
                   controller: firstNameController,
                   maxLength: 50,
                 ),
@@ -36,7 +37,7 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
               const SizedBox(width: 16),
               Expanded(
                 child: CustomTextFormField(
-                  fieldName: 'Last Name',
+                  fieldName: AppStrings.lastName,
                   maxLength: 50,
                   controller: lastNameController,
                 ),
@@ -45,30 +46,30 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
           ),
           const SizedBox(height: 12),
           CustomTextFormField(
-            fieldName: 'Email Address',
+            fieldName: AppStrings.email,
             maxLength: 64,
             controller: emailAddressController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Email Address is required';
+                return AppStrings.emailIsRequired;
               }
               String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
               RegExp regex = RegExp(pattern);
               if (!regex.hasMatch(value)) {
-                return 'Invalid Email Address';
+                return AppStrings.emailIsInvalid;
               }
               return null;
             },
           ),
           const SizedBox(height: 12),
           CustomTextFormField(
-            fieldName: 'Password',
+            fieldName: AppStrings.password,
             controller: passwordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Password is required';
+                return AppStrings.passwordIsRequired;
               } else if (value.length < 8) {
-                return 'Password must be at least 8 characters long';
+                return AppStrings.passwordLength;
               }
               return null;
             },
@@ -76,11 +77,11 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
               icon: isPasswordSecure
                   ? const Icon(
                 Icons.visibility_off_outlined,
-                color: kGrey400Color,
+                color: AppColors.kGrey400Color
               )
                   : const Icon(
                 Icons.remove_red_eye_outlined,
-                color: kGrey400Color,
+                color: AppColors.kGrey400Color,
               ),
               onPressed: () {
                 setState(() {
@@ -92,14 +93,14 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
           ),
           const SizedBox(height: 12),
           CustomTextFormField(
-            fieldName: 'Confirm Password',
+            fieldName: AppStrings.confirmPassword,
             controller: passwordConfirmationController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Confirm Password is required';
+                return AppStrings.confirmPasswordIsRequired;
               }
               if (value != passwordController.text) {
-                return 'Password and Confirm Password do not match';
+                return AppStrings.matchPasswordWithConfirmPassword;
               }
               return null;
             },
@@ -107,11 +108,11 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
               icon: isConfirmationPasswordSecure
                   ? const Icon(
                 Icons.visibility_off_outlined,
-                color: kGrey400Color,
+                color: AppColors.kGrey400Color,
               )
                   : const Icon(
                 Icons.remove_red_eye_outlined,
-                color: kGrey400Color,
+                color: AppColors.kGrey400Color,
               ),
               onPressed: () {
                 setState(() {

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kafiil_app/Features/login/data/repos/login_repo_impl.dart';
 import 'package:kafiil_app/Features/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:kafiil_app/Features/login/presentation/manager/login_cubit/login_state.dart';
-import 'package:kafiil_app/core/functions/custom_snack_bar.dart';
-import 'package:kafiil_app/core/shared_components/back_icon_button.dart';
+import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/utils/app_router.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
-import 'package:kafiil_app/features/login/presentation/views/widgets/haveNoAccountSection.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/core/utils/helpers/functions/custom_snack_bar.dart';
+import 'package:kafiil_app/core/utils/widgets/back_icon_button.dart';
+import 'package:kafiil_app/features/login/presentation/views/widgets/have_no_account_section.dart';
 import 'package:kafiil_app/features/login/presentation/views/widgets/login_form_section.dart';
 import 'package:kafiil_app/features/login/presentation/views/widgets/login_picture.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -28,20 +30,20 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(),
+      create: (context) => LoginCubit(LoginRepoImpl()),
       child: BlocConsumer<LoginCubit,LoginState>(
           builder: (context,state){
             return ModalProgressHUD(
               inAsyncCall: isLoading,
-              color: kPrimary900Color,
+              color: AppColors.kPrimary900Color,
               child: Scaffold(
                 appBar: AppBar(
                   scrolledUnderElevation: 0,
                   leading: const BackIconButton(),
                   titleSpacing: -16,
                   title: Text(
-                    'Account Login',
-                    style: StylesApp.styleSemiBold18(context),
+                    AppStrings.accountLogin,
+                    style: AppStyles.styleSemiBold18(context),
                   ),
                 ),
                 body: const SingleChildScrollView(
@@ -70,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
               GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
               isLoading = false;
             } else {
-              customSnackBar(context, 'Email Address or Password is Wrong',
+              customSnackBar(context, AppStrings.loginFailure,
                   iconColor: Colors.red,
                   icon: FontAwesomeIcons.exclamation,
                   customDuration: 3

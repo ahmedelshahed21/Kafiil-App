@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({
@@ -24,13 +24,13 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         style: TextButton.styleFrom(
-            backgroundColor: backgroundColor ?? kPrimary900Color,
+            backgroundColor: backgroundColor ?? AppColors.kPrimary900Color,
             shape: RoundedRectangleBorder(
                 borderRadius: borderRadius ??BorderRadius.circular(radius ?? 12))),
         onPressed: onPressed,
         child: child ?? Text(
           text??'',
-          style: StylesApp.styleMedium15(context),
+          style: AppStyles.styleMedium15(context),
         ));
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kafiil_app/core/utils/assets_app.dart';
-import 'package:kafiil_app/core/utils/constants.dart';
-import 'package:kafiil_app/core/utils/styles_app.dart';
+import 'package:kafiil_app/core/constants/app_assets.dart';
+import 'package:kafiil_app/core/theme/app_colors.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 
 class RatingSection extends StatelessWidget {
   const RatingSection({
@@ -18,30 +18,30 @@ class RatingSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Icon(FontAwesomeIcons.solidStar,
-          color: kWarning300Color,
+          color: AppColors.kWarning300Color,
           size: 16,
         ),
         const SizedBox(width: 5,),
         Text('($rating)',
-          style: StylesApp.styleMedium12(context).copyWith(
+          style: AppStyles.styleMedium12(context).copyWith(
               fontSize: 11,
-              color: kWarning300Color
+              color: AppColors.kWarning300Color,
           ),
         ),
         const SizedBox(width: 5,),
         Text('|',
-          style: StylesApp.styleMedium12(context).copyWith(
+          style: AppStyles.styleMedium12(context).copyWith(
               fontSize: 10,
-              color: kGrey300Color
+              color: AppColors.kWarning300Color,
           ),
         ),
         const SizedBox(width: 5,),
-        SvgPicture.asset(ImagesApp.groupIcon),
+        SvgPicture.asset(AppAssets.groupIcon),
         const SizedBox(width: 5,),
         Text('$salesCount',
-          style: StylesApp.styleMedium12(context).copyWith(
+          style: AppStyles.styleMedium12(context).copyWith(
               fontSize: 10,
-              color: kGrey600Color
+              color: AppColors.kWarning300Color,
           ),
         )
       ],
