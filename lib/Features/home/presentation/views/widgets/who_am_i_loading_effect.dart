@@ -4,6 +4,7 @@ import 'package:kafiil_app/Features/home/presentation/views/widgets/add_image_lo
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/core/utils/widgets/item_loading_effect.dart';
 import 'package:shimmer/shimmer.dart';
 
 class WhoAmILoadingEffect extends StatelessWidget {
@@ -21,101 +22,17 @@ class WhoAmILoadingEffect extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            Row(
+            const Row(
               children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(AppStrings.firstName,
-                        style: AppStyles.styleMedium12(context),
-                      ),
-                      const SizedBox(height: 5.0),
-                      Shimmer.fromColors(
-                        baseColor: AppColors.kGrey50Color,
-                        highlightColor: AppColors.kBackgroundColor,
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: AppColors.kGrey50Color,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(AppStrings.lastName,
-                        style: AppStyles.styleMedium12(context),
-                      ),
-                      const SizedBox(height: 5.0),
-                      Shimmer.fromColors(
-                        baseColor: AppColors.kGrey50Color,
-                        highlightColor: AppColors.kBackgroundColor,
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: AppColors.kGrey50Color,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                Expanded(child: ItemLoadingEffect(itemName: AppStrings.firstName)),
+                SizedBox(width: 16),
+                Expanded(child: ItemLoadingEffect(itemName: AppStrings.lastName)),
               ],
             ),
             const SizedBox(height: 12),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(AppStrings.email,
-                  style: AppStyles.styleMedium12(context),
-                ),
-                const SizedBox(height: 5.0),
-                Shimmer.fromColors(
-                  baseColor: AppColors.kGrey50Color,
-                  highlightColor: AppColors.kBackgroundColor,
-                  child: Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors.kGrey50Color,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            const ItemLoadingEffect(itemName: AppStrings.email),
             const SizedBox(height: 12),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(AppStrings.password,
-                  style: AppStyles.styleMedium12(context),
-                ),
-                const SizedBox(height: 5.0),
-                Shimmer.fromColors(
-                  baseColor: AppColors.kGrey50Color,
-                  highlightColor: AppColors.kBackgroundColor,
-                  child: Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors.kGrey50Color,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            const ItemLoadingEffect(itemName: AppStrings.password),
             const SizedBox(height: 12),
             Align(
               alignment: Alignment.bottomLeft,
@@ -203,71 +120,11 @@ class WhoAmILoadingEffect extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(AppStrings.about,
-                  style: AppStyles.styleMedium12(context),
-                ),
-                const SizedBox(height: 5.0),
-                Shimmer.fromColors(
-                  baseColor: AppColors.kGrey50Color,
-                  highlightColor: AppColors.kBackgroundColor,
-                  child: Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors.kGrey50Color,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            const ItemLoadingEffect(itemName: AppStrings.about,height: 200),
             const SizedBox(height: 12),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(AppStrings.salary,
-                  style: AppStyles.styleMedium12(context),
-                ),
-                const SizedBox(height: 5.0),
-                Shimmer.fromColors(
-                  baseColor: AppColors.kGrey50Color,
-                  highlightColor: AppColors.kBackgroundColor,
-                  child: Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: AppColors.kGrey50Color,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            const ItemLoadingEffect(itemName: AppStrings.salary),
             const SizedBox(height: 12),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(AppStrings.birthDate,
-                  style: AppStyles.styleMedium12(context),
-                ),
-                const SizedBox(height: 5.0),
-                Shimmer.fromColors(
-                  baseColor: AppColors.kGrey50Color,
-                  highlightColor: AppColors.kBackgroundColor,
-                  child: Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: AppColors.kGrey50Color,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            const ItemLoadingEffect(itemName: AppStrings.birthDate),
             const SizedBox(height: 50),
           ],
         ),

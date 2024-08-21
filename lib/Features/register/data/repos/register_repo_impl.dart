@@ -52,7 +52,6 @@ class RegisterRepoImpl implements RegisterRepo {
 
     if (response.statusCode != 200) {
       final Map<String, dynamic> responseData = json.decode(responseBody);
-
       if (responseData.containsKey('errors')) {
         final errors = responseData['errors'];
         String firstErrorMessage;
@@ -67,7 +66,7 @@ class RegisterRepoImpl implements RegisterRepo {
 
         throw Exception(firstErrorMessage);
       } else {
-        throw Exception(responseData['message'] ?? 'Registration failed');
+        return responseData['message'] ?? 'Registration failed';
       }
     }
   }

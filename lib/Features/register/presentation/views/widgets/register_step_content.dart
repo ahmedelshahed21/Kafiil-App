@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kafiil_app/Features/register/presentation/manager/dependencies_cubit/user_types_cubit/user_types_cubit.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
+import 'package:kafiil_app/core/data/repos/dependencies_repo.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/utils/widgets/custom_text_form_field.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/custom_drop_down_list.dart';
 
 
 class RegisterStepContent extends StatefulWidget {
-
   final GlobalKey<FormState> formKey;
+
   const RegisterStepContent({super.key, required this.formKey});
 
   @override
   State<RegisterStepContent> createState() => _RegisterStepContentState();
 }
+
 class _RegisterStepContentState extends State<RegisterStepContent> {
   bool isPasswordSecure = true;
   bool isConfirmationPasswordSecure = true;
 
   @override
   Widget build(BuildContext context) {
-
     return Form(
       key: widget.formKey,
       child: Column(
@@ -75,14 +78,12 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
             },
             suffixIcon: IconButton(
               icon: isPasswordSecure
-                  ? const Icon(
-                Icons.visibility_off_outlined,
-                color: AppColors.kGrey400Color
-              )
+                  ? const Icon(Icons.visibility_off_outlined,
+                      color: AppColors.kGrey400Color)
                   : const Icon(
-                Icons.remove_red_eye_outlined,
-                color: AppColors.kGrey400Color,
-              ),
+                      Icons.remove_red_eye_outlined,
+                      color: AppColors.kGrey400Color,
+                    ),
               onPressed: () {
                 setState(() {
                   isPasswordSecure = !isPasswordSecure;
@@ -107,13 +108,13 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
             suffixIcon: IconButton(
               icon: isConfirmationPasswordSecure
                   ? const Icon(
-                Icons.visibility_off_outlined,
-                color: AppColors.kGrey400Color,
-              )
+                      Icons.visibility_off_outlined,
+                      color: AppColors.kGrey400Color,
+                    )
                   : const Icon(
-                Icons.remove_red_eye_outlined,
-                color: AppColors.kGrey400Color,
-              ),
+                      Icons.remove_red_eye_outlined,
+                      color: AppColors.kGrey400Color,
+                    ),
               onPressed: () {
                 setState(() {
                   isConfirmationPasswordSecure = !isConfirmationPasswordSecure;
@@ -123,7 +124,11 @@ class _RegisterStepContentState extends State<RegisterStepContent> {
             obscureText: isConfirmationPasswordSecure,
           ),
           const SizedBox(height: 12),
-          const CustomDropDownList(),
+          BlocProvider(
+              create: (context) => UserTypesCubit(
+                    dependenciesRepo: DependenciesRepoImpl(),
+                  )..fetchDependencies(),
+              child: const CustomDropDownList()),
           const SizedBox(height: 30),
         ],
       ),

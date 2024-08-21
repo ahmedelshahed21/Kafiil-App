@@ -30,6 +30,10 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
               isFacebookSelected = !isFacebookSelected;
               if (isFacebookSelected == true) {
                 favouriteSocialMedia.add('facebook');
+                isXSelected=false;
+                isInstagramSelected=false;
+                favouriteSocialMedia.remove('x');
+                favouriteSocialMedia.remove('instagram');
               }
               if (isFacebookSelected == false) {
                 favouriteSocialMedia.remove('facebook');
@@ -48,7 +52,11 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
                     setState(() {
                       isFacebookSelected = value!;
                       if (isFacebookSelected == true) {
+                        isInstagramSelected=false;
+                        isXSelected=false;
                         favouriteSocialMedia.add('facebook');
+                        favouriteSocialMedia.remove('x');
+                        favouriteSocialMedia.remove('instagram');
                       }
                       if (isFacebookSelected == false) {
                         favouriteSocialMedia.remove('facebook');
@@ -74,7 +82,11 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
             setState(() {
               isXSelected=!isXSelected;
               if (isXSelected == true) {
+                isFacebookSelected=false;
+                isInstagramSelected=false;
                 favouriteSocialMedia.add('x');
+                favouriteSocialMedia.remove('instagram');
+                favouriteSocialMedia.remove('facebook');
               }
               if (isXSelected == false) {
                 favouriteSocialMedia.remove('x');
@@ -93,6 +105,10 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
                     setState(() {
                       isXSelected = value!;
                       if (isXSelected == true) {
+                        isFacebookSelected=false;
+                        isInstagramSelected=false;
+                        favouriteSocialMedia.remove('instagram');
+                        favouriteSocialMedia.remove('facebook');
                         favouriteSocialMedia.add('x');
                       }
                       if (isXSelected == false) {
@@ -116,6 +132,10 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
             setState(() {
               isInstagramSelected=!isInstagramSelected;
               if (isInstagramSelected == true) {
+                isFacebookSelected=false;
+                isXSelected=false;
+                favouriteSocialMedia.remove('x');
+                favouriteSocialMedia.remove('facebook');
                 favouriteSocialMedia.add('instagram');
               }
               if (isInstagramSelected == false) {
@@ -136,6 +156,10 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
                     setState(() {
                       isInstagramSelected = value!;
                       if (isInstagramSelected == true) {
+                        isFacebookSelected=false;
+                        isXSelected=false;
+                        favouriteSocialMedia.remove('x');
+                        favouriteSocialMedia.remove('facebook');
                         favouriteSocialMedia.add('instagram');
                       }
                       if (isInstagramSelected == false) {

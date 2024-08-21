@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
-import 'package:kafiil_app/Features/register/presentation/views/widgets/clickable_container.dart';
+import 'package:kafiil_app/Features/register/presentation/views/widgets/grey_container.dart';
 import 'package:kafiil_app/Features/register/presentation/views/widgets/custom_floating_action_button.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
@@ -25,7 +25,7 @@ class _SalarySectionState extends State<SalarySection> {
           style: AppStyles.styleMedium12(context),
         ),
         const SizedBox(height: 5),
-        ClickableContainer(
+        GreyContainer(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
