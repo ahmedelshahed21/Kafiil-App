@@ -27,16 +27,16 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
         GestureDetector(
           onTap: () {
             setState(() {
-              isFacebookSelected = !isFacebookSelected;
-              if (isFacebookSelected == true) {
-                favouriteSocialMedia.add('facebook');
-                isXSelected=false;
-                isInstagramSelected=false;
-                favouriteSocialMedia.remove('x');
-                favouriteSocialMedia.remove('instagram');
+              userProfile.isFacebookSelected = !userProfile.isFacebookSelected;
+              if (userProfile.isFacebookSelected == true) {
+                userProfile.favouriteSocialMedia.add('facebook');
+                userProfile.isXSelected=false;
+                userProfile.isInstagramSelected=false;
+                userProfile.favouriteSocialMedia.remove('x');
+                userProfile.favouriteSocialMedia.remove('instagram');
               }
-              if (isFacebookSelected == false) {
-                favouriteSocialMedia.remove('facebook');
+              if (userProfile.isFacebookSelected == false) {
+                userProfile.favouriteSocialMedia.remove('facebook');
               }
             });
           },
@@ -47,19 +47,19 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
               children: [
                 Checkbox(
                   activeColor: AppColors.kPrimary900Color,
-                  value: isFacebookSelected,
+                  value: userProfile.isFacebookSelected,
                   onChanged: (value) {
                     setState(() {
-                      isFacebookSelected = value!;
-                      if (isFacebookSelected == true) {
-                        isInstagramSelected=false;
-                        isXSelected=false;
-                        favouriteSocialMedia.add('facebook');
-                        favouriteSocialMedia.remove('x');
-                        favouriteSocialMedia.remove('instagram');
+                      userProfile.isFacebookSelected = value!;
+                      if (userProfile.isFacebookSelected == true) {
+                        userProfile.isInstagramSelected=false;
+                        userProfile.isXSelected=false;
+                        userProfile.favouriteSocialMedia.add('facebook');
+                        userProfile.favouriteSocialMedia.remove('x');
+                        userProfile.favouriteSocialMedia.remove('instagram');
                       }
-                      if (isFacebookSelected == false) {
-                        favouriteSocialMedia.remove('facebook');
+                      if (userProfile.isFacebookSelected == false) {
+                        userProfile.favouriteSocialMedia.remove('facebook');
                       }
                     });
                   },
@@ -80,16 +80,16 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
         GestureDetector(
           onTap: () {
             setState(() {
-              isXSelected=!isXSelected;
-              if (isXSelected == true) {
-                isFacebookSelected=false;
-                isInstagramSelected=false;
-                favouriteSocialMedia.add('x');
-                favouriteSocialMedia.remove('instagram');
-                favouriteSocialMedia.remove('facebook');
+              userProfile.isXSelected=!userProfile.isXSelected;
+              if (userProfile.isXSelected == true) {
+                userProfile.isFacebookSelected=false;
+                userProfile.isInstagramSelected=false;
+                userProfile.favouriteSocialMedia.add('x');
+                userProfile.favouriteSocialMedia.remove('instagram');
+                userProfile.favouriteSocialMedia.remove('facebook');
               }
-              if (isXSelected == false) {
-                favouriteSocialMedia.remove('x');
+              if (userProfile.isXSelected == false) {
+                userProfile.favouriteSocialMedia.remove('x');
               }
             });
           },
@@ -100,19 +100,19 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
               children: [
                 Checkbox(
                   activeColor: AppColors.kPrimary900Color,
-                  value: isXSelected,
+                  value: userProfile.isXSelected,
                   onChanged: (value) {
                     setState(() {
-                      isXSelected = value!;
-                      if (isXSelected == true) {
-                        isFacebookSelected=false;
-                        isInstagramSelected=false;
-                        favouriteSocialMedia.remove('instagram');
-                        favouriteSocialMedia.remove('facebook');
-                        favouriteSocialMedia.add('x');
+                      userProfile.isXSelected = value!;
+                      if (userProfile.isXSelected == true) {
+                        userProfile.isFacebookSelected=false;
+                        userProfile.isInstagramSelected=false;
+                        userProfile.favouriteSocialMedia.remove('instagram');
+                        userProfile.favouriteSocialMedia.remove('facebook');
+                        userProfile.favouriteSocialMedia.add('x');
                       }
-                      if (isXSelected == false) {
-                        favouriteSocialMedia.remove('x');
+                      if (userProfile.isXSelected == false) {
+                        userProfile.favouriteSocialMedia.remove('x');
                       }
                     });
                   },
@@ -130,16 +130,16 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
         GestureDetector(
           onTap: (){
             setState(() {
-              isInstagramSelected=!isInstagramSelected;
-              if (isInstagramSelected == true) {
-                isFacebookSelected=false;
-                isXSelected=false;
-                favouriteSocialMedia.remove('x');
-                favouriteSocialMedia.remove('facebook');
-                favouriteSocialMedia.add('instagram');
+              userProfile.isInstagramSelected=!userProfile.isInstagramSelected;
+              if (userProfile.isInstagramSelected == true) {
+                userProfile.isFacebookSelected=false;
+                userProfile.isXSelected=false;
+                userProfile.favouriteSocialMedia.remove('x');
+                userProfile.favouriteSocialMedia.remove('facebook');
+                userProfile.favouriteSocialMedia.add('instagram');
               }
-              if (isInstagramSelected == false) {
-                favouriteSocialMedia.remove('instagram');
+              if (userProfile.isInstagramSelected == false) {
+                userProfile.favouriteSocialMedia.remove('instagram');
               }
 
             });
@@ -151,19 +151,19 @@ class _FavouriteSocialMediaSectionState extends State<FavouriteSocialMediaSectio
               children: [
                 Checkbox(
                   activeColor: AppColors.kPrimary900Color,
-                  value: isInstagramSelected,
+                  value: userProfile.isInstagramSelected,
                   onChanged: (value) {
                     setState(() {
-                      isInstagramSelected = value!;
-                      if (isInstagramSelected == true) {
-                        isFacebookSelected=false;
-                        isXSelected=false;
-                        favouriteSocialMedia.remove('x');
-                        favouriteSocialMedia.remove('facebook');
-                        favouriteSocialMedia.add('instagram');
+                      userProfile.isInstagramSelected = value!;
+                      if (userProfile.isInstagramSelected == true) {
+                        userProfile.isFacebookSelected=false;
+                        userProfile.isXSelected=false;
+                        userProfile.favouriteSocialMedia.remove('x');
+                        userProfile.favouriteSocialMedia.remove('facebook');
+                        userProfile.favouriteSocialMedia.add('instagram');
                       }
-                      if (isInstagramSelected == false) {
-                        favouriteSocialMedia.remove('instagram');
+                      if (userProfile.isInstagramSelected == false) {
+                        userProfile.favouriteSocialMedia.remove('instagram');
                       }
                     });
                   },

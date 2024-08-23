@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
-import 'package:kafiil_app/core/utils/widgets/custom_text_form_field.dart';
+import 'package:kafiil_app/core/widgets/custom_text_form_field.dart';
 
 class NameSection extends StatelessWidget{
 

@@ -11,6 +11,8 @@ class GenderSection extends StatefulWidget{
 }
 
 class _GenderSectionState extends State<GenderSection> {
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,7 +30,7 @@ class _GenderSectionState extends State<GenderSection> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  gender = false;
+                  userProfile.gender = false;
                 });
               },
               child: Row(
@@ -36,10 +38,10 @@ class _GenderSectionState extends State<GenderSection> {
                 children: [
                   Radio(
                       value: false,
-                      groupValue: gender,
+                      groupValue: userProfile.gender ,
                       onChanged: (value) {
                         setState(() {
-                          gender = value!;
+                          userProfile.gender = value!;
                         });
                       }),
                   Text(
@@ -52,17 +54,17 @@ class _GenderSectionState extends State<GenderSection> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  gender = true;
+                  userProfile.gender  = true;
                 });
               },
               child: Row(
                 children: [
                   Radio(
                       value: true,
-                      groupValue: gender,
+                      groupValue: userProfile.gender ,
                       onChanged: (value) {
                         setState(() {
-                          gender = value!;
+                          userProfile.gender = value!;
                         });
                       }),
                   Text(

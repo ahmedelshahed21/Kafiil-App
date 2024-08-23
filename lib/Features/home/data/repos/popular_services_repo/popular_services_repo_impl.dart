@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:kafiil_app/Features/home/data/models/services_model.dart';
 import 'package:kafiil_app/Features/home/data/repos/popular_services_repo/popular_services_repo.dart';
-import 'package:kafiil_app/core/errors/failure.dart';
 import 'package:kafiil_app/core/utils/api_service.dart';
+import 'package:kafiil_app/core/utils/errors/failure.dart';
 
 class PopularServicesRepoImpl extends PopularServicesRepo {
   final ApiService apiService;

@@ -30,23 +30,23 @@ class UserTypeSection extends StatelessWidget {
           children: [
             Radio(
               activeColor: AppColors.kPrimary900Color,
-              value: 'seller',
-              groupValue: userType,
-              onChanged: userTypeOnChanged,
-            ),
-            Text(
-              'seller',
-              style: AppStyles.styleMedium16(context),
-            ),
-            const SizedBox(width: 10),
-            Radio(
-              activeColor: AppColors.kPrimary900Color,
               value: 'buyer',
               groupValue: userType,
               onChanged: userTypeOnChanged,
             ),
             Text(
               'buyer',
+              style: AppStyles.styleMedium16(context),
+            ),
+            const SizedBox(width: 10),
+            Radio(
+              activeColor: AppColors.kPrimary900Color,
+              value: 'seller',
+              groupValue: userType,
+              onChanged: userTypeOnChanged,
+            ),
+            Text(
+              'seller',
               style: AppStyles.styleMedium16(context),
             ),
             const SizedBox(width: 10),

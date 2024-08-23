@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:kafiil_app/Features/home/data/models/country_model.dart';
 import 'package:kafiil_app/Features/home/data/repos/countries_repo/countries_repo.dart';
 import 'package:kafiil_app/core/constants/constants.dart';
-import 'package:kafiil_app/core/errors/failure.dart';
+import 'package:kafiil_app/core/utils/errors/failure.dart';
+
 
 
 class CountriesRepoImpl implements CountriesRepo {

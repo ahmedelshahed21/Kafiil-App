@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kafiil_app/Features/splash/presentation/views/widgets/sliding_text.dart';
 import 'package:kafiil_app/core/constants/app_assets.dart';
-import 'package:kafiil_app/core/utils/app_router.dart';
+import 'package:kafiil_app/core/routing/app_router.dart';
 
 class SplashViewBody extends StatefulWidget{
   const SplashViewBody({super.key});

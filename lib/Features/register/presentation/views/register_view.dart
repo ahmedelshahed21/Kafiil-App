@@ -1,35 +1,36 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:kafiil_app/Features/register/data/models/user_profile.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
-import 'package:kafiil_app/core/utils/widgets/back_icon_button.dart';
-import 'package:kafiil_app/core/utils/widgets/custom_text_button.dart';
+import 'package:kafiil_app/core/widgets/back_icon_button.dart';
+import 'package:kafiil_app/core/widgets/custom_text_button.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/complete_data_step_content.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/register_step_content.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/error_container.dart';
 
-TextEditingController firstNameController=TextEditingController();
-TextEditingController lastNameController=TextEditingController();
-TextEditingController emailAddressController=TextEditingController();
-TextEditingController passwordController=TextEditingController();
-TextEditingController passwordConfirmationController=TextEditingController();
-int userTypeValue=0;
-TextEditingController aboutController=TextEditingController();
-TextEditingController birthdateController = TextEditingController();
-bool gender = false;
-int counter = 100;
-List<String> favouriteSocialMedia = ['facebook'];
-List<String> selectedSkills = [];
-List<int> tags=[];
-bool isFacebookSelected = true;
-bool isXSelected = false;
-bool isInstagramSelected = false;
-File? avatar;
+// TextEditingController firstNameController=TextEditingController();
+// TextEditingController lastNameController=TextEditingController();
+// TextEditingController emailAddressController=TextEditingController();
+// TextEditingController passwordController=TextEditingController();
+// TextEditingController passwordConfirmationController=TextEditingController();
+// int userTypeValue=0;
+// TextEditingController aboutController=TextEditingController();
+// TextEditingController birthdateController = TextEditingController();
+// bool gender = false;
+// int counter = 100;
+// List<String> favouriteSocialMedia = ['facebook'];
+// List<String> selectedSkills = [];
+// List<int> tags=[];
+// bool isFacebookSelected = true;
+// bool isXSelected = false;
+// bool isInstagramSelected = false;
+// File? avatar;
 
+
+final UserProfile userProfile = UserProfile();
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
-
   @override
   RegisterViewState createState() => RegisterViewState();
 }

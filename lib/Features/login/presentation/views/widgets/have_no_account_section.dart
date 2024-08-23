@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
-import 'package:kafiil_app/core/utils/app_router.dart';
+import 'package:kafiil_app/core/routing/app_router.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
 
 class HaveNoAccountSection extends StatelessWidget{

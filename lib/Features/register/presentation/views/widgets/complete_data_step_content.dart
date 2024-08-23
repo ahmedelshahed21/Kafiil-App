@@ -18,9 +18,9 @@ import 'package:kafiil_app/core/constants/app_assets.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/utils/helpers/functions/custom_snack_bar.dart';
-import 'package:kafiil_app/core/utils/widgets/custom_text_button.dart';
-import 'package:kafiil_app/core/utils/widgets/custom_text_form_field.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/core/widgets/custom_text_button.dart';
+import 'package:kafiil_app/core/widgets/custom_text_form_field.dart';
 
 
 class CompleteDataStepContent extends StatefulWidget {
@@ -32,6 +32,7 @@ class CompleteDataStepContent extends StatefulWidget {
 
 class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
   final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
+   // Instantiate UserProfile
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
           CustomTextFormField(
             fieldName: AppStrings.about,
             minLines: 4,
-            controller: aboutController,
+            controller: userProfile.aboutController,
             maxLength: 1000,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -62,7 +63,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
           const SizedBox(height: 12),
           CustomTextFormField(
             fieldName: AppStrings.birthDate,
-            controller: birthdateController,
+            controller: userProfile.birthdateController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return AppStrings.birthdateIsRequired;
@@ -85,7 +86,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
               );
               if (pickedDate != null && pickedDate != DateTime.now()) {
                 setState(() {
-                  birthdateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
+                  userProfile.birthdateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
                 });
               }
             },
@@ -100,13 +101,13 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
           const SizedBox(height: 12.0),
           const SkillsSection2(),
           const SizedBox(height: 12.0),
-          const FavouriteSocialMediaSection(),
+         const FavouriteSocialMediaSection(),
           const SizedBox(height: 30),
           BlocProvider(
             create: (context) => RegisterCubit(RegisterRepoImpl()),
             child: BlocConsumer<RegisterCubit, RegisterState>(
               builder: (context, state) {
-                if (state is RegisterLoadingState){
+                if (state is RegisterLoadingState) {
                   return Center(
                     child: SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.09,
@@ -114,12 +115,11 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       child: const CustomTextButton(
                         child: CircularProgressIndicator(
                           color: AppColors.kBackgroundColor,
-                        )
+                        ),
                       ),
                     ),
                   );
-                }
-                else if(state is RegisterSuccessState){
+                } else if (state is RegisterSuccessState) {
                   return Center(
                     child: SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.09,
@@ -129,8 +129,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                       ),
                     ),
                   );
-                }
-                else{
+                } else {
                   return Center(
                     child: SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.09,
@@ -139,21 +138,20 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                         text: AppStrings.submitButton,
                         onPressed: () {
                           if (_formKey2.currentState!.validate()) {
-                           RegisterModel registerModel;
-                            registerModel = RegisterModel(
-                              firstName: firstNameController.text,
-                              lastName: lastNameController.text,
-                              about: aboutController.text,
-                              tags: tags,
-                              favoriteSocialMedia: favouriteSocialMedia,
-                              salary: counter,
-                              password: passwordController.text,
-                              email: emailAddressController.text,
-                              birthDate: birthdateController.text,
-                              type: userTypeValue,
-                              gender: gender,
-                              passwordConfirmation: passwordConfirmationController.text,
-                              avatar: avatar,
+                            RegisterModel registerModel = RegisterModel(
+                              firstName: userProfile.firstNameController.text,
+                              lastName: userProfile.lastNameController.text,
+                              about: userProfile.aboutController.text,
+                              tags: userProfile.tags,
+                              favoriteSocialMedia: userProfile.favouriteSocialMedia,
+                              salary: userProfile.counter,
+                              password: userProfile.passwordController.text,
+                              email: userProfile.emailAddressController.text,
+                              birthDate: userProfile.birthdateController.text,
+                              type: userProfile.userTypeValue,
+                              gender: userProfile.gender,
+                              passwordConfirmation: userProfile.passwordConfirmationController.text,
+                              avatar: userProfile.avatar,
                             );
 
                             print(registerModel.firstName);
@@ -168,7 +166,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                             print(registerModel.birthDate);
                             print(registerModel.tags);
                             print(registerModel.gender);
-                           print(registerModel.favoriteSocialMedia);
+                            print(registerModel.favoriteSocialMedia);
 
                             BlocProvider.of<RegisterCubit>(context)
                                 .registerUser(registerModel);
@@ -188,11 +186,9 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                   customSnackBar(context, AppStrings.registrationComplete, icon: Icons.check_circle, iconColor: AppColors.kPrimary900Color, textStyle: AppStyles.styleSemiBold14(context).copyWith(color: Colors.greenAccent));
                   GoRouter.of(context).pop();
                 } else if (state is RegisterFailureState) {
-                  customSnackBar(context,state.errorMessage.toString(),iconColor: Colors.red, icon: FontAwesomeIcons.exclamation, customDuration:3);
+                  customSnackBar(context, state.errorMessage.toString(), iconColor: Colors.red, icon: FontAwesomeIcons.exclamation, customDuration: 3);
                 }
-                else{
-
-                }
+                else {}
               },
             ),
           )

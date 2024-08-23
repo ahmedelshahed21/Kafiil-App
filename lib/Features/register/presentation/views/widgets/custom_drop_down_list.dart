@@ -7,7 +7,8 @@ import 'package:kafiil_app/core/data/models/dependencies_model.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/core/utils/helpers/functions/outline_input_border.dart';
-import 'package:kafiil_app/core/utils/widgets/item_loading_effect.dart';
+import 'package:kafiil_app/core/widgets/item_loading_effect.dart';
+
 
 
 class CustomDropDownList extends StatefulWidget {
@@ -18,6 +19,7 @@ class CustomDropDownList extends StatefulWidget {
 }
 
 class _CustomDropDownListState extends State<CustomDropDownList> {
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserTypesCubit, UserTypesState>(
@@ -69,7 +71,7 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
                   setState(() {
                     for(int i=0;i<state.dependencies.types.length;i++){
                       if (newValue == state.dependencies.types[i].label) {
-                        userTypeValue = state.dependencies.types[i].value;
+                        userProfile.userTypeValue = state.dependencies.types[i].value;
                       }
                     }
                   });

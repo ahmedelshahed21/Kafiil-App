@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafiil_app/Features/home/data/models/country_model.dart';
 import 'package:kafiil_app/Features/home/data/repos/countries_repo/countries_repo_impl.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/countries_cubit/countries_state.dart';
-import 'package:kafiil_app/core/errors/failure.dart';
+import 'package:kafiil_app/core/utils/errors/failure.dart';
 
 class CountriesCubit extends Cubit<CountriesState> {
   final CountriesRepoImpl countriesRepoImpl;

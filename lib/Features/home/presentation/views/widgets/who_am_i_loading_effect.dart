@@ -4,7 +4,7 @@ import 'package:kafiil_app/Features/home/presentation/views/widgets/add_image_lo
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
-import 'package:kafiil_app/core/utils/widgets/item_loading_effect.dart';
+import 'package:kafiil_app/core/widgets/item_loading_effect.dart';
 import 'package:shimmer/shimmer.dart';
 
 class WhoAmILoadingEffect extends StatelessWidget {

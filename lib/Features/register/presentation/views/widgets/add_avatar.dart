@@ -17,6 +17,7 @@ class AddAvatar extends StatefulWidget {
 }
 
 class _AddAvatarState extends State<AddAvatar> {
+
   final imagePicker = ImagePicker();
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,8 @@ class _AddAvatarState extends State<AddAvatar> {
             buildImageBottomSheet(context);
           },
           child: CircleAvatar(
-            backgroundImage: avatar != null
-                ? FileImage(avatar!) as ImageProvider
+            backgroundImage: userProfile.avatar != null
+                ? FileImage(userProfile.avatar!) as ImageProvider
                 : const AssetImage(AppAssets.completeDataImage),
             backgroundColor: AppColors.kPrimary100Color,
             radius: 41.5,
@@ -95,7 +96,7 @@ class _AddAvatarState extends State<AddAvatar> {
 
     if (pickedImage != null) {
       setState(() {
-        avatar = File(pickedImage!.path);
+        userProfile.avatar = File(pickedImage!.path);
       });
     }
   }

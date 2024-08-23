@@ -5,8 +5,9 @@ import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/core/utils/helpers/functions/custom_snack_bar.dart';
-import 'package:kafiil_app/core/utils/widgets/custom_text_button.dart';
-import 'package:kafiil_app/core/utils/widgets/custom_text_form_field.dart';
+import 'package:kafiil_app/core/widgets/custom_text_button.dart';
+import 'package:kafiil_app/core/widgets/custom_text_form_field.dart';
+
 
 class LoginFormSection extends StatefulWidget {
   const LoginFormSection({super.key});

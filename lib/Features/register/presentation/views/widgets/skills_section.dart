@@ -7,7 +7,7 @@ import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/data/repos/dependencies_repo.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
-import 'package:kafiil_app/core/utils/widgets/item_loading_effect.dart';
+import 'package:kafiil_app/core/widgets/item_loading_effect.dart';
 import 'package:multi_select_flutter/chip_display/multi_select_chip_display.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
@@ -19,6 +19,7 @@ class SkillsSection2 extends StatefulWidget {
 }
 
 class _SkillsSection2State extends State<SkillsSection2> {
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -67,10 +68,10 @@ class _SkillsSection2State extends State<SkillsSection2> {
                         items: skillItems,
                         onConfirm: (values) {
                           setState(() {
-                            selectedSkills = values.cast<String>();
+                            userProfile.selectedSkills = values.cast<String>();
                               for (int i = 0; i < state.dependencies.tags.length; i++) {
-                                if (selectedSkills.contains(state.dependencies.tags[i].label)) {
-                                  tags.add(state.dependencies.tags[i].value);
+                                if (userProfile.selectedSkills.contains(state.dependencies.tags[i].label)) {
+                                  userProfile.tags.add(state.dependencies.tags[i].value);
                                 }
                               }
 
@@ -82,7 +83,7 @@ class _SkillsSection2State extends State<SkillsSection2> {
                               .copyWith(color: AppColors.kPrimary900Color,),
                           onTap: (value) {
                             setState(() {
-                              selectedSkills.remove(value);
+                              userProfile.selectedSkills.remove(value);
                             });
                           },
                         ),

@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:kafiil_app/Features/home/data/models/who_am_i_model.dart';
 import 'package:kafiil_app/Features/home/data/repos/who_am_i_repo/who_am_i_repo.dart';
 import 'package:kafiil_app/core/constants/constants.dart';
-import 'package:kafiil_app/core/errors/failure.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kafiil_app/core/utils/errors/failure.dart';
 
 
 class WhoAmIRepoImpl implements WhoAmIRepo {

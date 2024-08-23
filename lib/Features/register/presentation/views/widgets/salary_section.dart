@@ -15,6 +15,7 @@ class SalarySection extends StatefulWidget{
 }
 
 class _SalarySectionState extends State<SalarySection> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,9 +34,7 @@ class _SalarySectionState extends State<SalarySection> {
                   heroTag: 'minus',
                   onPressed: () {
                     setState(() {
-                      if (counter > 100) {
-                        counter -= 100;
-                      }
+                        userProfile.counter  -= 100;
                     });
                   },
                   child: const Icon(
@@ -44,7 +43,7 @@ class _SalarySectionState extends State<SalarySection> {
                     size: 20,
                   )),
               Text(
-                '${AppStrings.sar} $counter',
+                '${AppStrings.sar} ${userProfile.counter}',
                 style: AppStyles.styleMedium16(context).copyWith(
                   color: AppColors.kGrey800Color,
                 ),
@@ -53,9 +52,7 @@ class _SalarySectionState extends State<SalarySection> {
                   heroTag: 'plus',
                   onPressed: () {
                     setState(() {
-                      if (counter < 1000) {
-                        counter += 100;
-                      }
+                        userProfile.counter  += 100;
                     });
                   },
                   child: const Icon(

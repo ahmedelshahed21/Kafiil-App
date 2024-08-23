@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafiil_app/Features/home/data/models/services_model.dart';
 import 'package:kafiil_app/Features/home/data/repos/services_repo/services_repo_impl.dart';
-import 'package:kafiil_app/core/errors/failure.dart';
+import 'package:kafiil_app/core/utils/errors/failure.dart';
 import 'services_state.dart';
 
 class ServicesCubit extends Cubit<ServicesState> {

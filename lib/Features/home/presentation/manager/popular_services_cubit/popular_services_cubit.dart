@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafiil_app/Features/home/data/models/services_model.dart';
 import 'package:kafiil_app/Features/home/data/repos/popular_services_repo/popular_services_repo_impl.dart';
 import 'package:kafiil_app/Features/home/presentation/manager/popular_services_cubit/popular_services_state.dart';
-import 'package:kafiil_app/core/errors/failure.dart';
+import 'package:kafiil_app/core/utils/errors/failure.dart';
+
 
 
 class PopularServicesCubit extends Cubit<PopularServicesState> {
