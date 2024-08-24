@@ -154,7 +154,19 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                               avatar: userProfile.avatar,
                             );
 
-
+                            // print(registerModel.firstName);
+                            // print(registerModel.lastName);
+                            // print(registerModel.email);
+                            // print(registerModel.password);
+                            // print(registerModel.passwordConfirmation);
+                            // print(registerModel.type);
+                            // print(registerModel.avatar);
+                            // print(registerModel.about);
+                            // print(registerModel.salary);
+                            // print(registerModel.birthDate);
+                            // print(registerModel.tags);
+                            // print(registerModel.gender);
+                            // print(registerModel.favoriteSocialMedia);
 
                             BlocProvider.of<RegisterCubit>(context)
                                 .registerUser(registerModel);

@@ -9,7 +9,23 @@ import 'package:kafiil_app/features/register/presentation/views/widgets/register
 import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/error_container.dart';
 
-
+// TextEditingController firstNameController=TextEditingController();
+// TextEditingController lastNameController=TextEditingController();
+// TextEditingController emailAddressController=TextEditingController();
+// TextEditingController passwordController=TextEditingController();
+// TextEditingController passwordConfirmationController=TextEditingController();
+// int userTypeValue=0;
+// TextEditingController aboutController=TextEditingController();
+// TextEditingController birthdateController = TextEditingController();
+// bool gender = false;
+// int counter = 100;
+// List<String> favouriteSocialMedia = ['facebook'];
+// List<String> selectedSkills = [];
+// List<int> tags=[];
+// bool isFacebookSelected = true;
+// bool isXSelected = false;
+// bool isInstagramSelected = false;
+// File? avatar;
 
 
 final UserProfile userProfile = UserProfile();

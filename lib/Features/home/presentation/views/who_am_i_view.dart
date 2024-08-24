@@ -15,7 +15,6 @@ import 'package:kafiil_app/core/constants/app_assets.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
-import 'package:kafiil_app/core/utils/service_locator.dart';
 import 'package:kafiil_app/core/widgets/custom_text_form_field.dart';
 import 'package:kafiil_app/features/register/presentation/views/widgets/add_new_image.dart';
 
@@ -51,7 +50,7 @@ class _WhoAmIViewState extends State<WhoAmIView> {
                 ),
                 const SizedBox(height: 30),
                 BlocProvider(
-                  create: (context)=>WhoAmICubit(getIt.get<WhoAmIRepoImpl>())..fetchPersonalData(),
+                  create: (context)=>WhoAmICubit(WhoAmIRepoImpl())..fetchPersonalData(),
                   child: BlocBuilder<WhoAmICubit, WhoAmIState>(
                     builder: (context, state) {
                       if (state is WhoAmILoading) {
