@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kafiil_app/core/data/models/dependencies_model.dart';
-import 'package:kafiil_app/core/data/repos/dependencies_repo.dart';
+import 'package:kafiil_app/Features/register/data/models/dependencies_model/dependencies_model.dart';
+import 'package:kafiil_app/Features/register/data/repos/dependecies_repo/dependencies_repo_impl.dart';
+
+
 
 class SocialMediaCubit extends Cubit<SocialMediaState> {
   final DependenciesRepoImpl _dependenciesRepo;

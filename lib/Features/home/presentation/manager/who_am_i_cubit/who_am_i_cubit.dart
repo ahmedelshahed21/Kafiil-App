@@ -15,8 +15,8 @@ class WhoAmICubit extends Cubit<WhoAmIState> {
     Either<Failure, WhoAmIModel> result = await whoAmIRepo.fetchPersonalDats();
 
     result.fold(
-          (failure) => emit(WhoAmIFailure(failure.errMessage??'UnKnown Error')),
-          (whoAmI) => emit(WhoAmISuccess(whoAmI)),
+      (failure) => emit(WhoAmIFailure(failure.errMessage ?? 'UnKnown Error')),
+      (whoAmI) => emit(WhoAmISuccess(whoAmI)),
     );
   }
 }

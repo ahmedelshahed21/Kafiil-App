@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:kafiil_app/Features/register/data/models/register_model.dart';
-import 'package:kafiil_app/Features/register/data/repos/register_repo_impl.dart';
+import 'package:kafiil_app/Features/register/data/models/register_model/register_model.dart';
+import 'package:kafiil_app/Features/register/data/repos/register_repos/register_repo_impl.dart';
 import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_state.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
@@ -154,19 +154,7 @@ class _CompleteDataStepContentState extends State<CompleteDataStepContent> {
                               avatar: userProfile.avatar,
                             );
 
-                            print(registerModel.firstName);
-                            print(registerModel.lastName);
-                            print(registerModel.email);
-                            print(registerModel.password);
-                            print(registerModel.passwordConfirmation);
-                            print(registerModel.type);
-                            print(registerModel.avatar);
-                            print(registerModel.about);
-                            print(registerModel.salary);
-                            print(registerModel.birthDate);
-                            print(registerModel.tags);
-                            print(registerModel.gender);
-                            print(registerModel.favoriteSocialMedia);
+
 
                             BlocProvider.of<RegisterCubit>(context)
                                 .registerUser(registerModel);

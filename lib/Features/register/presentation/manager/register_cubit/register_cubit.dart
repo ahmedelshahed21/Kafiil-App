@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kafiil_app/Features/register/data/models/register_model.dart';
-import 'package:kafiil_app/Features/register/data/repos/register_repo.dart';
+import 'package:kafiil_app/Features/register/data/models/register_model/register_model.dart';
+import 'package:kafiil_app/Features/register/data/repos/register_repos/register_repo.dart';
 import 'package:kafiil_app/Features/register/presentation/manager/register_cubit/register_state.dart';
 
 

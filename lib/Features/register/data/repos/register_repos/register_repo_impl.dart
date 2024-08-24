@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:kafiil_app/Features/register/data/models/register_model.dart';
-import 'package:kafiil_app/Features/register/data/repos/register_repo.dart';
+import 'package:kafiil_app/Features/register/data/models/register_model/register_model.dart';
+import 'package:kafiil_app/Features/register/data/repos/register_repos/register_repo.dart';
 import 'package:kafiil_app/core/constants/constants.dart';
-
 
 class RegisterRepoImpl implements RegisterRepo {
   @override
@@ -15,17 +14,17 @@ class RegisterRepoImpl implements RegisterRepo {
       ..headers['Accept-Language'] = 'ar'
       ..headers['Content-Type'] = 'multipart/form-data';
 
-    // Populate fields
+
     request.fields['first_name'] = registerModel.firstName;
     request.fields['last_name'] = registerModel.lastName;
     request.fields['about'] = registerModel.about;
 
-    // Add tags
+
     for (var tag in registerModel.tags) {
       request.fields['tags[]'] = tag.toString();
     }
 
-    // Add favorite social media
+
     for (var socialMedia in registerModel.favoriteSocialMedia) {
       request.fields['favorite_social_media[]'] = socialMedia;
     }
@@ -36,19 +35,23 @@ class RegisterRepoImpl implements RegisterRepo {
     request.fields['birth_date'] = registerModel.birthDate;
 
     if (registerModel.gender != null) {
-      request.fields['gender'] = registerModel.gender! ? '1' : '0';
+      request.fields['gender'] = registerModel.gender! ? '0' : '1';
     }
 
     request.fields['type'] = registerModel.type.toString();
     request.fields['password_confirmation'] = registerModel.passwordConfirmation;
 
-    // Add avatar file if available
+
     if (registerModel.avatar != null) {
       request.files.add(await http.MultipartFile.fromPath('avatar', registerModel.avatar!.path));
     }
 
     final response = await request.send();
     final responseBody = await response.stream.bytesToString();
+
+
+
+
 
     if (response.statusCode != 200) {
       final Map<String, dynamic> responseData = json.decode(responseBody);
@@ -64,9 +67,9 @@ class RegisterRepoImpl implements RegisterRepo {
           firstErrorMessage = 'Unknown error occurred';
         }
 
-        throw Exception(firstErrorMessage);
+        return Future.error(firstErrorMessage);
       } else {
-        return responseData['message'] ?? 'Registration failed';
+        return Future.error(responseData['message'] ?? 'Registration failed');
       }
     }
   }

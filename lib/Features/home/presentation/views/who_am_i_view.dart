@@ -124,7 +124,7 @@ class _WhoAmIViewState extends State<WhoAmIView> {
                             ),
                             const SizedBox(height: 12),
                             CustomTextFormField(
-                              fieldName: 'About',
+                              fieldName: AppStrings.about,
                               initialValue: whoAmI.about,
                               minLines: 4,
                               maxLength: 1200,
@@ -136,7 +136,7 @@ class _WhoAmIViewState extends State<WhoAmIView> {
                             const SizedBox(height: 12),
                             CustomTextFormField(
                               fieldName: AppStrings.salary,
-                              prefix: const Text('SAR '),
+                              prefix: const Text(AppStrings.sar),
                               validator: (v) {
                                 return null;
                               },

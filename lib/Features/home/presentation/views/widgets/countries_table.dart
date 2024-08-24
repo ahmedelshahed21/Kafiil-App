@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kafiil_app/Features/home/data/models/country_model.dart';
-import 'package:kafiil_app/Features/home/presentation/views/widgets/country_data_source.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
 import 'package:kafiil_app/core/constants/constants.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
-import 'package:kafiil_app/core/theme/app_styles.dart';
+import 'package:kafiil_app/features/home/presentation/views/widgets/country_data_source.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class CountriesTable extends StatefulWidget {
@@ -16,6 +16,7 @@ class CountriesTable extends StatefulWidget {
   @override
   CountriesTableState createState() => CountriesTableState();
 }
+
 class CountriesTableState extends State<CountriesTable> {
   late int _rowsPerPage;
   late double _dataPagerHeight;
@@ -53,7 +54,8 @@ class CountriesTableState extends State<CountriesTable> {
     return Theme(
       data: ThemeData.light().copyWith(
         colorScheme: const ColorScheme.light(
-            primary: AppColors.kPrimary900Color, secondary: AppColors.kBackgroundColor),
+            primary: AppColors.kPrimary900Color,
+            secondary: AppColors.kBackgroundColor),
       ),
       child: LayoutBuilder(
         builder: (context, constraint) {
@@ -79,7 +81,8 @@ class CountriesTableState extends State<CountriesTable> {
                     itemBorderWidth: 1.5,
                   ),
                   child: SfDataPager(
-                    delegate: CountryDataSource(paginatedCountries, _rowsPerPage),
+                    delegate:
+                        CountryDataSource(paginatedCountries, _rowsPerPage),
                     pageCount: _totalPages.toDouble(),
                     onPageNavigationStart: (int newPageIndex) {
                       setState(() {
@@ -118,7 +121,8 @@ class CountriesTableState extends State<CountriesTable> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       alignment: alignment,
       decoration: BoxDecoration(
-          color: AppColors.kGrey50Color, borderRadius: BorderRadius.circular(10)),
+          color: AppColors.kGrey50Color,
+          borderRadius: BorderRadius.circular(10)),
       child: Text(
         title,
         overflow: TextOverflow.ellipsis,
@@ -132,4 +136,3 @@ class CountriesTableState extends State<CountriesTable> {
     );
   }
 }
-

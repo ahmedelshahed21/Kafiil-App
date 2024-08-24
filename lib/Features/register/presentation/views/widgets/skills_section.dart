@@ -4,7 +4,7 @@ import 'package:kafiil_app/Features/register/presentation/manager/dependencies_c
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/Features/register/presentation/views/widgets/grey_container.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
-import 'package:kafiil_app/core/data/repos/dependencies_repo.dart';
+import 'package:kafiil_app/Features/register/data/repos/dependecies_repo/dependencies_repo_impl.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/core/widgets/item_loading_effect.dart';

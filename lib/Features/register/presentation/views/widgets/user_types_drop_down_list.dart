@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafiil_app/Features/register/presentation/manager/dependencies_cubit/user_types_cubit/user_types_cubit.dart';
 import 'package:kafiil_app/Features/register/presentation/views/register_view.dart';
 import 'package:kafiil_app/core/constants/app_strings.dart';
-import 'package:kafiil_app/core/data/models/dependencies_model.dart';
+import 'package:kafiil_app/Features/register/data/models/dependencies_model/dependencies_model.dart';
 import 'package:kafiil_app/core/theme/app_colors.dart';
 import 'package:kafiil_app/core/theme/app_styles.dart';
 import 'package:kafiil_app/core/utils/helpers/functions/outline_input_border.dart';
@@ -11,14 +11,14 @@ import 'package:kafiil_app/core/widgets/item_loading_effect.dart';
 
 
 
-class CustomDropDownList extends StatefulWidget {
-  const CustomDropDownList({super.key});
+class UserTypesDropDownList extends StatefulWidget {
+  const UserTypesDropDownList({super.key});
 
   @override
-  State<CustomDropDownList> createState() => _CustomDropDownListState();
+  State<UserTypesDropDownList> createState() => _UserTypesDropDownListState();
 }
 
-class _CustomDropDownListState extends State<CustomDropDownList> {
+class _UserTypesDropDownListState extends State<UserTypesDropDownList> {
 
   @override
   Widget build(BuildContext context) {
